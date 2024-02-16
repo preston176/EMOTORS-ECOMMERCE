@@ -1,7 +1,7 @@
 import React from 'react';
 import "./DescriptionBox.css";
 
-const DescriptionBox = () => {
+const DescriptionBox = ({ description }) => {
     return (
         <div className='descriptionbox'>
             <div className="descriptionbox-navigator">
@@ -13,8 +13,8 @@ const DescriptionBox = () => {
                 </div>
             </div>
             <div className="descriptionbox-description">
-                <p>an ecommerce errherehr</p>
-                <p>huuhuh</p>
+                <p>{description}</p>
+
             </div>
         </div>
     );

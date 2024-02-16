@@ -1,13 +1,18 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import './ProductDisplay.css'
 import star_icon from '../Assets/star_icon.png'
 import star_dull_icon from '../Assets/star_dull_icon.png'
-import { ShopContext } from '../../Context/ShopContext'
+import { useNavigate } from 'react-router-dom'
+
 
 const ProductDisplay = (props) => {
     const { product } = props;
-    const { addToCart } = useContext(ShopContext)
+    // const { addToCart } = useContext(ShopContext)
+    const navigate = useNavigate()
 
+    const handleNavigate = (id) => {
+        navigate(`/product/${id}/confirm-order`)
+    }
 
     return (
         <div className='productdisplay'>
@@ -33,17 +38,17 @@ const ProductDisplay = (props) => {
                     <img src={star_dull_icon} alt="" />
                 </div>
                 <div className="productdisplay-right-prices">
-                    <div className="productdisplay-right-price-old">
+                    {/* <div className="productdisplay-right-price-old">
                         ${product.old_price}
-                    </div>
+                    </div> */}
                     <div className="productdisplay-right-price-new">
-                        ${product.new_price}
+                        ${product.price}
                     </div>
                 </div>
                 <div className="productdisplay-right-description">
-                    A lerewirhuirhweuirriwerh
+                    {product.description}
                 </div>
-                <div className="productdisplay-right-size">
+                {/* <div className="productdisplay-right-size">
                     <h1>Select Size</h1>
                     <div className="productdisplay-size-sizes">
                         <div className="">S</div>
@@ -52,10 +57,10 @@ const ProductDisplay = (props) => {
                         <div className="">XL</div>
                         <div className="">XXL</div>
                     </div>
-                </div>
-                <button onClick={()=>{addToCart(product.id)}}>ADD TO CART</button>
-                <p className='productdisplay-right-category'><span>Category :</span>Women, T-Shirt, Crop Top</p>
-                <p className='productdisplay-right-category'><span>Tags :</span>Modern, Latest</p>
+                </div> */}
+                <button onClick={() => handleNavigate(product.id)}>ADD TO CART</button>
+                <p className='productdisplay-right-category'><span>Category :</span>{product.category}</p>
+
             </div>
         </div>
 

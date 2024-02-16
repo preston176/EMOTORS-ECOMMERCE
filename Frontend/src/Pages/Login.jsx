@@ -32,6 +32,7 @@ const Login = () => {
                 if (response.ok) {
                     // User logged in successfully, you can redirect or show a success message
                     toast.success('Login successful');
+                    
                 } else {
                     // Error occurred during login, handle accordingly
                     toast.error('Invalid email or password');
