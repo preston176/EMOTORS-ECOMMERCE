@@ -83,10 +83,7 @@ const LoginSignup = () => {
                     </div>
                     <button onClick={handleSignup}>Sign Up</button>
                     <p className='loginsignup-login'>Already have an account? <span> <Link to={"/loginpage"}>Login</Link></span></p>
-                    <div className="loginsignup-agree">
-                        <input type='checkbox' />
-                        <p>By continuing you agree ...</p>
-                    </div>
+
                 </div>
 
             </div>
