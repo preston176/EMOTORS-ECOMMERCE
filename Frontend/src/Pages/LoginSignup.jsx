@@ -2,13 +2,15 @@ import React, { useState } from 'react'
 import './Css/LoginSignup.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const LoginSignup = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+
+    const navigate = useNavigate();
 
     const handleSignup = () => {
         // Perform form validation
@@ -43,6 +45,7 @@ const LoginSignup = () => {
                     // User created successfully, you can redirect or show a success message
                     // alert('User created successfully');
                     toast.success('User created successfully');
+                    navigate('/loginpage');
                 } else {
                     // Error occurred during user creation, handle accordingly
                     // alert('Failed to create user');

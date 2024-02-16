@@ -11,6 +11,7 @@ import men_banner from './Components/Assets/banner_mens.png'
 import women_banner from './Components/Assets/banner_women.png'
 import kid_banner from './Components/Assets/banner_kids.png'
 import Login from './Pages/Login'
+import UserProfile from './Pages/UserProfile'
 
 
 const App = () => {
@@ -26,8 +27,9 @@ const App = () => {
           <Route path='/product' element={<Product />}>       <Route path=':productId' element={<Product />} />
           </Route>
           <Route path="/product/:productId/confirm-order" element={<ConfirmOrder />} />
-          <Route path="/login" element={<LoginSignup />} />
+          <Route path="/signup" element={<LoginSignup />} />
           <Route path='/loginpage' element={<Login />} />
+          <Route path='/loginpage/:userId/profile' element={<UserProfile />} />
         </Routes>
         <Footer />
       </BrowserRouter>

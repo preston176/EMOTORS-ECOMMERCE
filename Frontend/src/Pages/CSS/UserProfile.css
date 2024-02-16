@@ -1,0 +1,19 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.left-profile-section,
+.right-profile-section h2 {
+  text-align: center;
+}
+
+.order-table {
+  width: 80%;
+  margin: auto;
+  height: 200px;
+  border-collapse: collapse;
+  margin-top: 20px;
+}

@@ -133,7 +133,7 @@ app.post('/login', (req, res) => {
     }
 
     // Check if the user exists in the database and the provided credentials match
-    connection.query('SELECT * FROM Users WHERE email = ? AND password = ?', [email, password], (err, results) => {
+    connection.query('SELECT * FROM Users WHERE email = ? AND password = ? ', [email, password], (err, results) => {
         if (err) {
             console.error('Error executing login query:', err.stack);
             res.status(500).json({ error: 'Internal server error' });
@@ -149,6 +149,35 @@ app.post('/login', (req, res) => {
         res.status(200).json({ message: 'Login successful' });
     });
 });
+
+// Endpoint to fetch user ID based on email
+app.get('/login_id', (req, res) => {
+    const { email } = req.query;
+
+    // Check if the email field is missing
+    if (!email) {
+        return res.status(400).json({ error: 'Email is required' });
+    }
+
+    // Check if the user exists in the database based on the email
+    connection.query('SELECT id FROM Users WHERE email = ?', email, (err, results) => {
+        if (err) {
+            console.error('Error executing query:', err.stack);
+            res.status(500).json({ error: 'Internal server error' });
+            return;
+        }
+
+        // If no user found with the given email
+        if (results.length === 0) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // User found, send back the user ID
+        const userId = results[0].id;
+        res.status(200).json({ userId: userId });
+    });
+});
+
 
 // Start the server
 app.listen(port, () => {

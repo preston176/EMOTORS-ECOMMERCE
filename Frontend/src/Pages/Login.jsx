@@ -2,12 +2,17 @@ import React, { useState } from 'react';
 import './Css/LoginSignup.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const [userId, setUserId] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleLogin = () => {
+    const navigate = useNavigate();
+
+    const handleLogin = async (e) => {
+        e.preventDefault()
         // Perform form validation
         if (!email || !password) {
             toast.error('Please fill in all fields');
@@ -20,29 +25,49 @@ const Login = () => {
             password: password
         };
 
-        // Make a POST request to your backend API for user login
-        fetch('http://localhost:3000/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(userData)
-        })
-            .then(response => {
-                if (response.ok) {
-                    // User logged in successfully, you can redirect or show a success message
-                    toast.success('Login successful');
-                    
-                } else {
-                    // Error occurred during login, handle accordingly
-                    toast.error('Invalid email or password');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                toast.error('An error occurred, please try again later');
+        try {
+            // Make a POST request to your backend API for user login
+            const loginResponse = await fetch('http://localhost:3000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
             });
+
+            if (!loginResponse.ok) {
+                // Error occurred during login, handle accordingly
+                toast.error('Invalid email or password');
+                return;
+            }
+
+            // User logged in successfully
+            const loginData = await loginResponse.json();
+            const userEmail = email; // Assuming email is accessible in this scope
+
+            // Fetch user ID using the email
+            const idResponse = await fetch(`http://localhost:3000/login_id?email=${userEmail}`);
+
+            if (idResponse.ok) {
+                const idData = await idResponse.json();
+                const userId = idData.userId; // Assuming the response JSON contains userId
+
+                // Set the user ID and show success message
+                setUserId(userId);
+                toast.success('Login successful');
+
+                navigate(`${userId}/profile`)
+            } else {
+                // Error occurred while fetching user ID
+                toast.error('Error fetching user ID');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            toast.error('An error occurred, please try again later');
+        }
     };
+
+
 
     return (
         <>
@@ -62,16 +87,15 @@ const Login = () => {
             <div className='loginsignup'>
                 <div className="loginsignup-container">
                     <h1>Login</h1>
-                    <div className="loginsignup-fields">
-                        <input required value={email} onChange={e => setEmail(e.target.value)} type='email' placeholder='Email Address' />
-                        <input required value={password} onChange={e => setPassword(e.target.value)} type='password' placeholder='Your password' />
-                    </div>
-                    <button onClick={handleLogin}>Login</button>
-                    <p className='loginsignup-login'>Don't have an account? <span>Sign Up</span></p>
-                    <div className="loginsignup-agree">
-                        <input type='checkbox' />
-                        <p>By continuing you agree ...</p>
-                    </div>
+                    <form onSubmit={handleLogin} >
+                        <div className="loginsignup-fields">
+                            <input required value={email} onChange={e => setEmail(e.target.value)} type='email' placeholder='Email Address' />
+                            <input required value={password} onChange={e => setPassword(e.target.value)} type='password' placeholder='Your password' />
+                        </div>
+                        <button onClick={handleLogin}>Login</button>
+                    </form>
+                    <p className='loginsignup-login'>Don't have an account? <span><Link to={"/signup"}>Sign Up</Link></span></p>
+
                 </div>
             </div>
         </>

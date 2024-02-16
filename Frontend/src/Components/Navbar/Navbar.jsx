@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 
 const Navbar = () => {
 
+    const [auth, setAuth] = useState(false);
 
 
     return (
@@ -21,7 +22,7 @@ const Navbar = () => {
                 <li><Link to='/kids'>Kids</Link></li>
             </ul>
             <div className='nav-login-cart'>
-                <Link to='/login'><button>Log In</button></Link>
+                <Link to='/loginpage'><button>{auth ? "Log Out" : "Log In"}</button></Link>
                 <Link to="/cart"> <img src={cart_icon} alt='cart' /></Link>
                 <div className="nav-cart-count">0</div>
             </div>
