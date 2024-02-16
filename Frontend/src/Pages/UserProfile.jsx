@@ -1,23 +1,44 @@
-import React from 'react'
-import './CSS/UserProfile.css'
+import React, { useEffect, useState } from 'react';
+import './CSS/UserProfile.css';
 import { useParams } from 'react-router-dom';
-
 
 const UserProfile = () => {
     const { userId } = useParams();
-    // do function to fetch user data from backend using userId
-    // const fetchUserData = async () => {
-    //     const response = await fetch(`http://localhost:3000/user/${userId}`);
-    //     if (response.ok) {
-    //         const userData = await response.json();
-    //         // do something with the user data
-    //     } else {
-    //         console.error('Error fetching user data');
-    //     }
-    // }
-    // fetchUserData();
+    const [userData, setUserData] = useState(null);
+    const [filteredOrders, setFilteredOrders] = useState(null);
+    const [statusFilter, setStatusFilter] = useState('all');
 
-    
+    // Function to fetch user data from backend using userId
+    // const fetchUserData = async () => {
+    //     try {
+    //         const response = await fetch(`http://localhost:3000/user/${userId}`);
+    //         if (response.ok) {
+    //             const userData = await response.json();
+    //             setUserData(userData);
+    //             setFilteredOrders(userData.orders); // Set initial orders to display
+    //         } else {
+    //             console.error('Error fetching user data');
+    //         }
+    //     } catch (error) {
+    //         console.error('Error:', error);
+    //     }
+    // };
+
+    useEffect(() => {
+        // fetchUserData();
+    }, [userId]);
+
+    // Function to filter orders based on status
+    const filterOrders = (status) => {
+        if (status === 'all') {
+            setFilteredOrders(userData.orders);
+        } else {
+            const filtered = userData.orders.filter(order => order.status.toLowerCase() === status);
+            setFilteredOrders(filtered);
+        }
+        setStatusFilter(status);
+    };
+
     return (
         <div className='profile-container'>
             <div className="left-profile-section">
@@ -25,6 +46,11 @@ const UserProfile = () => {
             </div>
             <div className="right-profile-section">
                 <h2>Your Orders</h2>
+                <div className="filter-buttons">
+                    <button onClick={() => filterOrders('all')}>View All</button>
+                    <button onClick={() => filterOrders('processing')}>View Processing</button>
+                    <button onClick={() => filterOrders('delivered')}>View Delivered</button>
+                </div>
                 <table className="order-table">
                     <thead>
                         <tr>
@@ -36,26 +62,20 @@ const UserProfile = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr className="order">
-                            <td>12345</td>
-                            <td>Mountain Bike</td>
-                            <td><img src="" alt="item_image" /></td>
-                            <td>12/12/2021</td>
-                            <td>Delivered</td>
-                        </tr>
-                        <tr className="order">
-                            <td>12346</td>
-                            <td>Bmx Bike</td>
-                            <td><img src="" alt="item_image" /></td>
-                            <td>13/12/2021</td>
-                            <td>Processing</td>
-                        </tr>
+                        {filteredOrders && filteredOrders.map(order => (
+                            <tr className="order" key={order.id}>
+                                <td>{order.orderId}</td>
+                                <td>{order.item}</td>
+                                <td><img src={order.imageUrl} alt="item_image" /></td>
+                                <td>{order.date}</td>
+                                <td>{order.status}</td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
-
         </div>
-    )
-}
+    );
+};
 
-export default UserProfile
+export default UserProfile;
