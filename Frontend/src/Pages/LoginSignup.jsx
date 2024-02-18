@@ -3,10 +3,12 @@ import './Css/LoginSignup.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link, useNavigate } from 'react-router-dom';
+import Navbar from '../Components/Navbar/Navbar';
 
 const LoginSignup = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -14,7 +16,7 @@ const LoginSignup = () => {
 
     const handleSignup = () => {
         // Perform form validation
-        if (!name || !email || !password || !confirmPassword) {
+        if (!name || !email || !password || !confirmPassword || !phone) {
             // alert('Please fill in all fields');
             toast.error('Please fill in all fields');
             return;
@@ -29,7 +31,8 @@ const LoginSignup = () => {
         const userData = {
             username: name,
             email: email,
-            password: password
+            password: password,
+            phone: phone
         };
 
         // Make a POST request to your backend API to create a new user
@@ -75,12 +78,14 @@ const LoginSignup = () => {
                 theme="light"
                 style={{ width: '400px', fontSize: '1.5rem' }}
             />
+            <Navbar />
             <div className='loginsignup'>
                 <div className="loginsignup-container">
                     <h1>Sign Up</h1>
                     <div className="loginsignup-fields">
                         <input required value={name} onChange={e => setName(e.target.value)} type='text' placeholder='Your name' />
                         <input required value={email} onChange={e => setEmail(e.target.value)} type='email' placeholder='Email Address' />
+                        <input required value={phone} onChange={e => setPhone(e.target.value)} type='number' placeholder='Phone Number' />
                         <input required value={password} onChange={e => setPassword(e.target.value)} type='password' placeholder='Your password' />
                         <input required value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} type='password' placeholder='Confirm password' />
                     </div>

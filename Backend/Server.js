@@ -105,21 +105,48 @@ app.get('/images/:productId', (req, res) => {
 
 // Endpoint for user signup
 app.post('/signup', (req, res) => {
-    const { username, email, password } = req.body;
+    const { username, email, password, phone } = req.body;
 
     // Check if any field is missing
-    if (!username || !email || !password) {
+    if (!username || !email || !password || !phone) {
         return res.status(400).json({ error: 'All fields are required' });
     }
 
     // Insert user into the database
-    connection.query('INSERT INTO Users (username, email, password, role) VALUES (?, ?, ?, ?)', [username, email, password, 'user'], (err, results) => {
+    connection.query('INSERT INTO Users (username, email, password, role, phone) VALUES (?, ?, ?, ?, ?)', [username, email, password, 'user', phone], (err, results) => {
         if (err) {
             console.error('Error creating user:', err.stack);
             res.status(500).json({ error: 'Internal server error' });
             return;
         }
         res.status(201).json({ message: 'User created successfully' });
+    });
+});
+
+//Endpoint to check if user details exist
+app.post('/order-confirmation', (req, res) => {
+    const { email, phone } = req.body;
+
+    // Check if any field is missing
+    if (!email || !phone) {
+        return res.status(400).json({ error: 'Email and phone are required' });
+    }
+
+    // Check if the user exists in the database and the provided credentials match
+    connection.query('SELECT * FROM Users WHERE email = ? OR phone = ? ', [email, phone], (err, results) => {
+        if (err) {
+            console.error('Error executing login query:', err.stack);
+            res.status(500).json({ error: 'Internal server error' });
+            return;
+        }
+
+        // If no user found with the given credentials
+        if (results.length === 0) {
+            return res.status(401).json({ error: 'Invalid email or phone' });
+        }
+
+        // User authenticated successfully
+        res.status(200).json({ message: 'Login successful' });
     });
 });
 

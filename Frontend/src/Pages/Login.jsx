@@ -3,6 +3,7 @@ import './Css/LoginSignup.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link, useNavigate } from 'react-router-dom';
+import Navbar from '../Components/Navbar/Navbar';
 
 const Login = () => {
     const [userId, setUserId] = useState('');
@@ -71,6 +72,7 @@ const Login = () => {
 
     return (
         <>
+
             <ToastContainer
                 position="top-right"
                 autoClose={5000}
@@ -84,6 +86,7 @@ const Login = () => {
                 theme="light"
                 style={{ width: '400px', fontSize: '1.5rem' }}
             />
+            <Navbar />
             <div className='loginsignup'>
                 <div className="loginsignup-container">
                     <h1>Login</h1>
