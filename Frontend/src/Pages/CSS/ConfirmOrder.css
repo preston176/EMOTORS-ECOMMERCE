@@ -113,3 +113,8 @@ tbody tr:hover {
   border: 2px solid #fa6400;
   transition: 0.15s;
 }
+
+.bike-image {
+  display: flex;
+  width: 20rem;
+}

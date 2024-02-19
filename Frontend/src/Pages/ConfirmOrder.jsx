@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import CartItems from '../Components/CartItems/CartItems';
 import { useParams } from 'react-router-dom';
 import "./CSS/ConfirmOrder.css";
+import GooglePayButton from '@google-pay/button-react';
 
 const currentDate = new Date().toDateString();
 const currentTime = new Date().toLocaleTimeString();
@@ -114,7 +115,7 @@ const ConfirmOrder = () => {
                     <tr>
                         <th>Product ID</th>
                         <th>Product Name</th>
-                        <th>Quantity</th>
+                        <th>Bike Photo</th>
                         <th>Price</th>
                     </tr>
                 </thead>
@@ -122,7 +123,7 @@ const ConfirmOrder = () => {
                     <tr>
                         <td>{selectedBike.id}</td>
                         <td>{selectedBike.name}</td>
-                        <td>{/* You need to render the quantity */}</td>
+                        <td><img className='bike-image' src={selectedBike.image} alt="" /></td>
                         <td>{selectedBike.price}</td>
                     </tr>
                 </tbody>
@@ -201,6 +202,45 @@ const ConfirmOrder = () => {
                                         <input id='phonenumber' required type="text" placeholder='Phone Number' value={phone} onChange={e => setPhone(e.target.value)} />
                                         <label htmlFor="date">Amount To Pay</label>
                                         <input id='number' type="number" value={selectedBikeAmount} disabled />
+                                        <GooglePayButton
+                                            environment="TEST"
+                                            paymentRequest={{
+                                                apiVersion: 2,
+                                                apiVersionMinor: 0,
+                                                allowedPaymentMethods: [
+                                                    {
+                                                        type: 'CARD',
+                                                        parameters: {
+                                                            allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+                                                            allowedCardNetworks: ['MASTERCARD', 'VISA'],
+                                                        },
+                                                        tokenizationSpecification: {
+                                                            type: 'PAYMENT_GATEWAY',
+                                                            parameters: {
+                                                                gateway: 'example',
+                                                                gatewayMerchantId: 'exampleGatewayMerchantId',
+                                                            },
+                                                        },
+                                                    },
+                                                ],
+                                                merchantInfo: {
+                                                    merchantId: '12345678901234567890',
+                                                    merchantName: 'Demo Merchant',
+                                                },
+                                                transactionInfo: {
+                                                    totalPriceStatus: 'FINAL',
+                                                    totalPriceLabel: 'Total',
+                                                    totalPrice: '100.00',
+                                                    currencyCode: 'USD',
+                                                    countryCode: 'US',
+                                                },
+                                            }}
+                                            onLoadPaymentData={paymentRequest => {
+                                                console.log('load payment data', paymentRequest);
+                                            }}
+                                        />
+
+
                                         <button type="submit" className='proceed-btn' onClick={handlePayment}>Pay Now</button>
                                     </form>
                                 </div>
