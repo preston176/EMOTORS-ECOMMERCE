@@ -7,7 +7,7 @@ import { UserAuthContext } from '../../Context/UserAuthContext'
 
 const Navbar = () => {
 
-    const { isAuth, handleUserAuth, activeUserId, setActiveUserId } = useContext(UserAuthContext);
+    const { isAuth, handleUserAuth, userDetails, setUserDetails } = useContext(UserAuthContext);
 
     const navigate = useNavigate();
 
@@ -18,7 +18,7 @@ const Navbar = () => {
             navigate('/');
         } else {
             // Redirect to login page
-            setActiveUserId(null);
+            setUserDetails(null);
             navigate('/loginpage');
         }
 
@@ -43,8 +43,8 @@ const Navbar = () => {
                 <button onClick={handleBtnClick}>{isAuth ? "Log Out" : "Log In"}</button>
                 {/* if the user is authenticated and his / her user id exists then render this */}
                 {
-                    activeUserId && isAuth && (
-                       <Link to={`/loginpage/${activeUserId}/profile`}> <h2>View Orders</h2></Link>
+                    userDetails && isAuth && (
+                       <Link to={`/loginpage/${userDetails.id}/profile`}> <h2>View Orders</h2></Link>
                     )
                 }
             </div>

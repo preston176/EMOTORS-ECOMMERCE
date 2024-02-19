@@ -13,13 +13,16 @@ import kid_banner from './Components/Assets/banner_kids.png'
 import Login from './Pages/Login'
 import UserProfile from './Pages/UserProfile'
 import { UserAuthContext } from './Context/UserAuthContext'
+import OrderLoginPage from './Pages/OrderLoginPage'
+import OrderSignupPage from './Pages/OrderSignupPage'
 
 
 const App = () => {
 
 
   const [isAuth, setIsAuth] = useState(false);
-  const [activeUserId, setActiveUserId] = useState(null);
+
+  const [userDetails, setUserDetails] = useState(null);
 
 
 
@@ -31,7 +34,7 @@ const App = () => {
   return (
     <div>
       <BrowserRouter>
-        <UserAuthContext.Provider value={{ isAuth, handleUserAuth, activeUserId, setActiveUserId }}>
+        <UserAuthContext.Provider value={{ isAuth, handleUserAuth, userDetails, setUserDetails }}>
           <Navbar />
           <Routes>
             <Route path="/" element={<Shop />} />
@@ -44,6 +47,9 @@ const App = () => {
             <Route path="/signup" element={<LoginSignup />} />
             <Route path='/loginpage' element={<Login />} />
             <Route path='/loginpage/:userId/profile' element={<UserProfile />} />
+            {/* Alternative login / signup pages */}
+            <Route path='/order-login-page' element={<OrderLoginPage />} />
+            <Route path='/order-signup-page' element={<OrderSignupPage />} />
           </Routes>
           <Footer />
         </UserAuthContext.Provider>

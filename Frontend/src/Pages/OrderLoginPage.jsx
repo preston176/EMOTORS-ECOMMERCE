@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserAuthContext } from '../Context/UserAuthContext';
 
-const Login = () => {
+const OrderLoginPage = () => {
     const { isAuth, handleUserAuth, setActiveUserId, setUserDetails } = useContext(UserAuthContext);
 
     const [userId, setUserId] = useState('');
@@ -66,7 +66,7 @@ const Login = () => {
 
                 // Show success message or navigate to the user profile page
                 toast.success('Login successful');
-                navigate(`/loginpage/${userDetails.id}/profile`);
+                navigate(-1);
 
                 // Proceed with user authentication
                 handleUserAuth();
@@ -107,7 +107,7 @@ const Login = () => {
                         </div>
                         <button onClick={handleLogin}>Login</button>
                     </form>
-                    <p className='loginsignup-login'>Don't have an account? <span><Link to={"/signup"}>Sign Up</Link></span></p>
+                    <p className='loginsignup-login'>Don't have an account? <span><Link to={"/order-signup-page"}>Sign Up</Link></span></p>
 
                 </div>
             </div>
@@ -115,4 +115,4 @@ const Login = () => {
     )
 }
 
-export default Login;
+export default OrderLoginPage;

@@ -127,7 +127,7 @@ app.post('/signup', (req, res) => {
 //endpoint to handle payment
 app.post('/mpesa', async (req, res) => {
     const url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
-    
+
     try {
         const response = await axios.post(url, req.body, {
             headers: {
@@ -135,7 +135,7 @@ app.post('/mpesa', async (req, res) => {
                 'Authorization': 'Bearer SmkcpEGH7bSEtTCEuS5BKG0V0QkT',
             }
         });
-        
+
         res.send(response.data);
     } catch (error) {
         console.error('Error:', error);
@@ -193,7 +193,8 @@ app.post('/login', (req, res) => {
         }
 
         // User authenticated successfully
-        res.status(200).json({ message: 'Login successful' });
+        const userId = results[0].id; // Assuming 'id' is the field name for the user ID
+        res.status(200).json({ message: 'Login successful', userId: userId }); // Sending the user ID along with the response
     });
 });
 
@@ -225,6 +226,32 @@ app.get('/login_id', (req, res) => {
     });
 });
 
+app.get('/user_details/:id', (req, res) => {
+    const userId = req.params.id;
+
+    // Check if the user ID is missing
+    if (!userId) {
+        return res.status(400).json({ error: 'User ID is required' });
+    }
+
+    // Fetch user details from the database based on the user ID
+    connection.query('SELECT * FROM Users WHERE id = ?', userId, (err, results) => {
+        if (err) {
+            console.error('Error executing query:', err.stack);
+            res.status(500).json({ error: 'Internal server error' });
+            return;
+        }
+
+        // If no user found with the given ID
+        if (results.length === 0) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // User details found, send back the details
+        const userDetails = results[0];
+        res.status(200).json(userDetails);
+    });
+});
 
 // Start the server
 app.listen(port, () => {
