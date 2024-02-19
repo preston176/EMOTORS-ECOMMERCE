@@ -1,6 +1,7 @@
 const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
+const axios = require('axios');
 const cors = require('cors'); // Import the cors middleware
 const path = require('path');
 
@@ -121,6 +122,25 @@ app.post('/signup', (req, res) => {
         }
         res.status(201).json({ message: 'User created successfully' });
     });
+});
+
+//endpoint to handle payment
+app.post('/mpesa', async (req, res) => {
+    const url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
+    
+    try {
+        const response = await axios.post(url, req.body, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer SmkcpEGH7bSEtTCEuS5BKG0V0QkT',
+            }
+        });
+        
+        res.send(response.data);
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).send('Internal server error');
+    }
 });
 
 //Endpoint to check if user details exist
