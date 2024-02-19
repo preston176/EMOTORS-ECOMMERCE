@@ -98,7 +98,12 @@ const LoginSignup = () => {
                     <div className="loginsignup-fields">
                         <input required value={name} onChange={e => setName(e.target.value)} type='text' placeholder='Your name' />
                         <input required value={email} onChange={e => setEmail(e.target.value)} type='email' placeholder='Email Address' />
-                        <input required value={phone} onChange={e => setPhone(e.target.value)} type='number' placeholder='Phone Number' />
+                        <input required value={phone} onChange={e => {
+                            // Ensure the length of the value doesn't exceed 10
+                            if (e.target.value.length <= 10) {
+                                setPhone(e.target.value);
+                            }
+                        }} type='number' placeholder='Phone Number' />
                         <input required value={password} onChange={e => setPassword(e.target.value)} type='password' placeholder='Your password' />
                         <input required value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} type='password' placeholder='Confirm password' />
                     </div>
