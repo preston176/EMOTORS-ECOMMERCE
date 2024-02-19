@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Css/LoginSignup.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link, useNavigate } from 'react-router-dom';
-import Navbar from '../Components/Navbar/Navbar';
+import { UserAuthContext } from '../Context/UserAuthContext';
 
 const Login = () => {
+    const { isAuth, handleUserAuth } = useContext(UserAuthContext);
+
     const [userId, setUserId] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -58,6 +60,7 @@ const Login = () => {
                 toast.success('Login successful');
 
                 navigate(`${userId}/profile`)
+                handleUserAuth()
             } else {
                 // Error occurred while fetching user ID
                 toast.error('Error fetching user ID');
@@ -86,7 +89,7 @@ const Login = () => {
                 theme="light"
                 style={{ width: '400px', fontSize: '1.5rem' }}
             />
-            <Navbar />
+
             <div className='loginsignup'>
                 <div className="loginsignup-container">
                     <h1>Login</h1>

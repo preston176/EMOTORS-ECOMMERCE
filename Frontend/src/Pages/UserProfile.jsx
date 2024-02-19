@@ -41,7 +41,7 @@ const UserProfile = () => {
     };
 
     return (
-        <> <Navbar auth={true} />
+        <>
             <div className='profile-container'>
                 <div className="sidebar filter-buttons">
                     {/* Sidebar content */}

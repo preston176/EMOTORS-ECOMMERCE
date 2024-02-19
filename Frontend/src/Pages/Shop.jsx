@@ -9,7 +9,7 @@ import Navbar from '../Components/Navbar/Navbar'
 const Shop = () => {
     return (
         <div>
-            <Navbar />
+         
             <Hero />
             <Popular />
             <Offers />

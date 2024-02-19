@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './Navbar.css'
 import logo from '../Assets/logo.png'
 import cart_icon from '../Assets/cart_icon.png'
 import { Link, useNavigate } from 'react-router-dom'
+import { UserAuthContext } from '../../Context/UserAuthContext'
 
-const Navbar = ({ auth = false }) => {
+const Navbar = () => {
+
+    const { isAuth, handleUserAuth } = useContext(UserAuthContext);
 
     const navigate = useNavigate();
 
     const handleBtnClick = () => {
-        if (auth) {
+        if (isAuth) {
             // Log out the user
+            handleUserAuth();
             navigate('/');
         } else {
             // Redirect to login page
@@ -34,8 +38,8 @@ const Navbar = ({ auth = false }) => {
                 <li><Link to='/kids'>Kids</Link></li>
             </ul>
             <div className='nav-login-cart'>
-                <button onClick={handleBtnClick}>{auth ? "Log Out" : "Log In"}</button>
-                
+                <button onClick={handleBtnClick}>{isAuth ? "Log Out" : "Log In"}</button>
+
             </div>
         </div>
     )
