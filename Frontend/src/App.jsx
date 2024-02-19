@@ -16,7 +16,12 @@ import { UserAuthContext } from './Context/UserAuthContext'
 
 
 const App = () => {
+
+
   const [isAuth, setIsAuth] = useState(false);
+  const [activeUserId, setActiveUserId] = useState(null);
+
+
 
   const handleUserAuth = () => {
     setIsAuth(!isAuth);
@@ -26,7 +31,7 @@ const App = () => {
   return (
     <div>
       <BrowserRouter>
-        <UserAuthContext.Provider value={{isAuth, handleUserAuth}}>
+        <UserAuthContext.Provider value={{ isAuth, handleUserAuth, activeUserId, setActiveUserId }}>
           <Navbar />
           <Routes>
             <Route path="/" element={<Shop />} />

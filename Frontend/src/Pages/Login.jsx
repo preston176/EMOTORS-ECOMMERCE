@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { UserAuthContext } from '../Context/UserAuthContext';
 
 const Login = () => {
-    const { isAuth, handleUserAuth } = useContext(UserAuthContext);
+    const { isAuth, handleUserAuth, setActiveUserId } = useContext(UserAuthContext);
 
     const [userId, setUserId] = useState('');
     const [email, setEmail] = useState('');
@@ -58,9 +58,11 @@ const Login = () => {
                 // Set the user ID and show success message
                 setUserId(userId);
                 toast.success('Login successful');
+                setActiveUserId(userId);
+                navigate(`${userId}/profile`);
 
-                navigate(`${userId}/profile`)
-                handleUserAuth()
+
+                handleUserAuth();
             } else {
                 // Error occurred while fetching user ID
                 toast.error('Error fetching user ID');
