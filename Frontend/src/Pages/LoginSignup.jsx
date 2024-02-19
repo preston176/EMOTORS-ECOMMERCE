@@ -17,8 +17,21 @@ const LoginSignup = () => {
     const handleSignup = () => {
         // Perform form validation
         if (!name || !email || !password || !confirmPassword || !phone) {
+
             // alert('Please fill in all fields');
             toast.error('Please fill in all fields');
+            return;
+        }
+
+        if (phone.length !== 10) {
+            // alert('Phone number should be 10 digits');
+            toast.error('Phone number should be 10 digits');
+            return;
+        }
+
+        if (email.indexOf('@') === -1 || email.indexOf('.') === -1) {
+            // alert('Invalid email');
+            toast.error('Invalid email');
             return;
         }
 
