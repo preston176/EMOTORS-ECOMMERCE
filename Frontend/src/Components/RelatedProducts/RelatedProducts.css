@@ -22,5 +22,7 @@
 .relatedproducts-item {
   margin-top: 50px;
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 30px;
 }

@@ -30,7 +30,7 @@ const Popular = () => {
 
 
     return (
-        <div className='popular'>
+        <div className='popular' id='popular'>
             <h1>POPULAR</h1>
             <hr />
             <div className="popular-item">

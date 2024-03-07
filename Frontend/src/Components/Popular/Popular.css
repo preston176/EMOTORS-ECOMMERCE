@@ -4,6 +4,7 @@
   align-items: center;
   gap: 10px;
   height: 90vh;
+  scroll-behavior: smooth;
 }
 
 .popular h1 {
@@ -26,4 +27,3 @@
   justify-content: center;
   margin-top: 50px;
 }
-

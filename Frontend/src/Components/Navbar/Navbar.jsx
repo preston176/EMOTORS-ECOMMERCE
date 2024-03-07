@@ -28,7 +28,7 @@ const Navbar = () => {
 
     return (
         <div className='navbar'>
-            <Link to="/"> <div className='nav-logo'>
+            <Link to="/" > <div className='nav-logo'>
                 <img src={logo} alt='logo' />
                 <p>Shopper</p>
             </div>

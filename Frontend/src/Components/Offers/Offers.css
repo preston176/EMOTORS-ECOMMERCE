@@ -46,3 +46,7 @@
   justify-content: flex-end;
   padding-top: 50px;
 }
+
+.offers-right img {
+  border-radius: 1rem;
+}
