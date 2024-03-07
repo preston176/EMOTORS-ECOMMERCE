@@ -36,7 +36,7 @@ const Product = () => {
         <div>
             <BreadCrumb product={selectedBike} />
             <ProductDisplay product={selectedBike} />
-            <DescriptionBox description={selectedBike.description} />
+            {/* <DescriptionBox description={selectedBike.description} /> */}
             <RelatedProducts />
         </div>
     );
