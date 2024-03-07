@@ -17,10 +17,14 @@ const Hero = () => {
                     <p>Pedal Into Adventure: </p>
                     <p>Find Your Perfect Ride Today!</p>
                 </div>
-                <div className="hero-latest-btn">
-                    <div>Buy Now</div>
-                    <img src={arrow_icon} alt="arrow-icon" />
-                </div>
+                <a href="#popular" className='hero-link'>
+                    <div className="hero-latest-btn">
+
+                        <img src={arrow_icon} alt="arrow-icon" />
+                        <div>Buy Now</div>
+
+                    </div>
+                </a>
             </div>
             <div className="hero-right">
                 <img src={hero_image} alt="" />

@@ -49,6 +49,22 @@
   color: white;
   font-size: 22px;
   font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  scroll-behavior: smooth;
+}
+.hero-latest-btn:hover {
+  transition: all 0.15s;
+  transform: scale(1.05);
+  background-color: #b02222;
+}
+
+.hero-latest-btn a {
+  text-decoration: none;
+  color: white;
+}
+.hero-link {
+  text-decoration: none;
 }
 
 .hero-right {
