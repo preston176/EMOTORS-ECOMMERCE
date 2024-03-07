@@ -11,6 +11,8 @@ const currentTime = new Date().toLocaleTimeString();
 
 const ConfirmOrder = () => {
     const { productId } = useParams();
+    // get bike quantity from global context
+    const { quantity } = useContext(UserAuthContext);
     const [selectedBike, setSelectedBike] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [showRegModal, setShowRegModal] = useState(false);
@@ -60,7 +62,7 @@ const ConfirmOrder = () => {
             .then(response => response.json())
             .then(data => {
                 setSelectedBike(data);
-                setSelectedBikeAmount(data.price);
+                setSelectedBikeAmount(data.price * quantity);
                 console.log(data);
             })
             .catch(error => {
@@ -105,6 +107,12 @@ const ConfirmOrder = () => {
                 alert('Failed to submit form');
             });
     };
+
+    const processOrder = () => {
+        // funciton to communicate with backend to handle proceessing of order
+        // it will get order details, submit to the order table and do quantity - 1;
+        // then it will navigate the person to thank you page where there is also a button to navigate to orders section
+    }
 
     return (
         !isAuth ? <OrderSignupPage /> : (
@@ -152,46 +160,44 @@ const ConfirmOrder = () => {
                                             <label htmlFor="date">Amount To Pay</label>
                                             <input id='number' type="number" value={selectedBikeAmount} disabled />
                                             <GooglePayButton
-    environment="TEST"
-    paymentRequest={{
-        apiVersion: 2,
-        apiVersionMinor: 0,
-        allowedPaymentMethods: [
-            {
-                type: 'CARD',
-                parameters: {
-                    allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
-                    allowedCardNetworks: ['MASTERCARD', 'VISA'],
-                },
-                tokenizationSpecification: {
-                    type: 'PAYMENT_GATEWAY',
-                    parameters: {
-                        gateway: 'example',
-                        gatewayMerchantId: 'exampleGatewayMerchantId',
-                    },
-                },
-            },
-        ],
-        merchantInfo: {
-            merchantId: '12345678901234567890',
-            merchantName: 'Demo Merchant',
-        },
-        transactionInfo: {
-            totalPriceStatus: 'FINAL',
-            totalPriceLabel: 'Total',
-            totalPrice: '100.00',
-            currencyCode: 'USD',
-            countryCode: 'US',
-        },
-    }}
-    onLoadPaymentData={paymentRequest => {
-        console.log('load payment data', paymentRequest);
-    }}
-    onPaymentAuthorized={paymentData => {
-        console.log('Payment Authorised Success', paymentData);
-        return { transactionState: 'SUCCESS' };
-    }}
-/>
+                                                environment="TEST"
+                                                paymentRequest={{
+                                                    apiVersion: 2,
+                                                    apiVersionMinor: 0,
+                                                    allowedPaymentMethods: [
+                                                        {
+                                                            type: 'CARD',
+                                                            parameters: {
+                                                                allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+                                                                allowedCardNetworks: ['MASTERCARD', 'VISA'],
+                                                            },
+                                                            tokenizationSpecification: {
+                                                                type: 'PAYMENT_GATEWAY',
+                                                                parameters: {
+                                                                    gateway: 'example',
+                                                                    gatewayMerchantId: 'exampleGatewayMerchantId',
+                                                                },
+                                                            },
+                                                        },
+                                                    ],
+                                                    merchantInfo: {
+                                                        merchantId: '12345678901234567890',
+                                                        merchantName: 'Demo Merchant',
+                                                    },
+                                                    transactionInfo: {
+                                                        totalPriceStatus: 'FINAL',
+                                                        totalPriceLabel: 'Total',
+                                                        totalPrice: '100',
+                                                        currencyCode: 'USD',
+                                                        countryCode: 'US',
+                                                    },
+                                                }}
+                                                onLoadPaymentData={paymentRequest => {
+                                                    console.log('load payment data', paymentRequest);
+                                                    // function to facilitate the success purchase
+                                                }}
+
+                                            />
 
 
 

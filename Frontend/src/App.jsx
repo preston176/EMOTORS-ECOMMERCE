@@ -23,6 +23,7 @@ const App = () => {
   const [isAuth, setIsAuth] = useState(false);
 
   const [userDetails, setUserDetails] = useState(null);
+  const [quantity, setQuantity] = useState(0);
 
 
 
@@ -34,7 +35,7 @@ const App = () => {
   return (
     <div>
       <BrowserRouter>
-        <UserAuthContext.Provider value={{ isAuth, handleUserAuth, userDetails, setUserDetails }}>
+        <UserAuthContext.Provider value={{ isAuth, handleUserAuth, userDetails, setUserDetails, quantity, setQuantity }}>
           <Navbar />
           <Routes>
             <Route path="/" element={<Shop />} />
