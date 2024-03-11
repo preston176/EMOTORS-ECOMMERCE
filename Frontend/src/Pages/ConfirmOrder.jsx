@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import CartItems from '../Components/CartItems/CartItems';
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import "./CSS/ConfirmOrder.css";
 import GooglePayButton from '@google-pay/button-react';
 import { UserAuthContext } from '../Context/UserAuthContext';
 import OrderSignupPage from './OrderSignupPage';
+import { toast } from 'react-toastify';
 
 const currentDate = new Date().toDateString();
 const currentTime = new Date().toLocaleTimeString();
@@ -21,6 +22,8 @@ const ConfirmOrder = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+
+    const navigate = useNavigate();
 
     const { isAuth, handleUserAuth, userDetails, setUserDetails } = useContext(UserAuthContext);
 
@@ -47,7 +50,10 @@ const ConfirmOrder = () => {
             }),
         })
             .then(response => response.text())
-            .then(result => console.log(result))
+            .then(result => console.log(result)).then(() => {
+                processOrder();
+            })
+
             .catch(error => console.log(error));
     }
 
@@ -112,6 +118,31 @@ const ConfirmOrder = () => {
         // funciton to communicate with backend to handle proceessing of order
         // it will get order details, submit to the order table and do quantity - 1;
         // then it will navigate the person to thank you page where there is also a button to navigate to orders section
+        fetch('http://localhost:3000/process_order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user_id: userDetails.id,
+                items: [{ product_id: selectedBike.id, quantity: quantity, price_per_unit: selectedBike.price }]
+            })
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Order processed successfully
+                    alert('Order processed successfully');
+                    // Navigate to the thank you page or update UI accordingly
+                    navigate('/thank-you');
+                    toast.success('Order processed successfully');
+                } else {
+                    // Order processing failed
+                    alert('Failed to process order');
+                }
+            })
+            .catch(error => console.error('Error processing order:', error));
+
+
     }
 
     return (
@@ -192,8 +223,10 @@ const ConfirmOrder = () => {
                                                         countryCode: 'US',
                                                     },
                                                 }}
-                                                onLoadPaymentData={paymentRequest => {
-                                                    console.log('load payment data', paymentRequest);
+                                                onLoadPaymentData={(paymentRequest) => {
+
+                                                    processOrder();
+
                                                     // function to facilitate the success purchase
                                                 }}
 

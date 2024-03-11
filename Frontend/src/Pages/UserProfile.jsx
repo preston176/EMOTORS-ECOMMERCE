@@ -1,50 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import './CSS/UserProfile.css';
 import { useParams } from 'react-router-dom';
-import Navbar from '../Components/Navbar/Navbar';
 
 const UserProfile = () => {
     const { userId } = useParams();
-    const [userData, setUserData] = useState(null);
-    const [filteredOrders, setFilteredOrders] = useState(null);
-    const [statusFilter, setStatusFilter] = useState('all');
-
-    // Function to fetch user data from backend using userId
-    // const fetchUserData = async () => {
-    //     try {
-    //         const response = await fetch(`http://localhost:3000/user/${userId}`);
-    //         if (response.ok) {
-    //             const userData = await response.json();
-    //             setUserData(userData);
-    //             setFilteredOrders(userData.orders); // Set initial orders to display
-    //         } else {
-    //             console.error('Error fetching user data');
-    //         }
-    //     } catch (error) {
-    //         console.error('Error:', error);
-    //     }
-    // };
+    const [userOrders, setUserOrders] = useState([]);
 
     useEffect(() => {
-        // fetchUserData();
-    }, [userId]);
+        const fetchUserOrders = async () => {
+            try {
+                // Fetch user orders
+                const ordersResponse = await fetch(`http://localhost:3000/orders/${userId}`);
+                if (ordersResponse.ok) {
+                    const ordersData = await ordersResponse.json();
+                    setUserOrders(ordersData);
+                } else {
+                    console.error('Error fetching user orders');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
 
-    // Function to filter orders based on status
-    const filterOrders = (status) => {
-        if (status === 'all') {
-            setFilteredOrders(userData.orders);
-        } else {
-            const filtered = userData.orders.filter(order => order.status.toLowerCase() === status);
-            setFilteredOrders(filtered);
-        }
-        setStatusFilter(status);
-    };
+        fetchUserOrders();
+    }, [userId]);
 
     return (
         <>
             <div className='profile-container'>
-                <div className="sidebar filter-buttons">
-                    {/* Sidebar content */}
+                <div className="sidebar">
+                    {/* Your sidebar content */}
                     <h2>Manage</h2>
                     <button>Change Personal Info</button>
                     <button>Change Personal Info</button>
@@ -54,33 +39,29 @@ const UserProfile = () => {
                     {/* Add any other sidebar content here */}
                 </div>
                 <div className="main-content">
-                    <div className="left-profile-section">
-                        <h2>Hello, </h2>
-                    </div>
                     <div className="right-profile-section">
                         <h2>Your Orders</h2>
-                        <div className="filter-buttons">
-                            <button onClick={() => filterOrders('all')}>View All</button>
-                            <button onClick={() => filterOrders('processing')}>View Processing</button>
-                            <button onClick={() => filterOrders('delivered')}>View Delivered</button>
-                        </div>
                         <table className="order-table">
                             <thead>
                                 <tr>
                                     <th>Order ID</th>
-                                    <th>Order Item</th>
-                                    <th>Order Image</th>
-                                    <th>Order Date</th>
+                                    <th>Order Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price Per Unit</th>
+                                    <th>Total Price</th>
+                                    <th>Purchased on</th>
                                     <th>Order Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {filteredOrders && filteredOrders.map(order => (
-                                    <tr className="order" key={order.id}>
-                                        <td>{order.orderId}</td>
-                                        <td>{order.item}</td>
-                                        <td><img src={order.imageUrl} alt="item_image" /></td>
-                                        <td>{order.date}</td>
+                                {userOrders.map(order => (
+                                    <tr key={order.order_id}>
+                                        <td>{order.order_id}</td>
+                                        <td>{order.product_name}</td> {/* Assuming you have a product name in your schema */}
+                                        <td>{order.quantity}</td>
+                                        <td>{order.price_per_unit}</td>
+                                        <td>{(order.quantity * order.price_per_unit).toFixed(2)}</td>
+                                        <td>{new Date(order.order_date).toLocaleString()}</td>
                                         <td>{order.status}</td>
                                     </tr>
                                 ))}

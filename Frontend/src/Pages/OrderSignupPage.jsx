@@ -68,7 +68,7 @@ const OrderSignupPage = () => {
                     // alert('User created successfully');
                     toast.success('User created successfully');
                     setUserDetails(userData)
-                    navigate('/order-login-page');
+                    navigate(-2);
                 } else {
                     // Error occurred during user creation, handle accordingly
                     // alert('Failed to create user');

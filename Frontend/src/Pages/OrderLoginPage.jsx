@@ -66,7 +66,7 @@ const OrderLoginPage = () => {
 
                 // Show success message or navigate to the user profile page
                 toast.success('Login successful');
-                navigate(-1);
+                navigate(-2);
 
                 // Proceed with user authentication
                 handleUserAuth();

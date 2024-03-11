@@ -198,6 +198,114 @@ app.post('/login', (req, res) => {
     });
 });
 
+//endpoint to handle order processing
+// Endpoint to process orders
+app.post('/process_order', (req, res) => {
+    const { user_id, items } = req.body;
+
+    // Check if any required field is missing
+    if (!user_id || !items || items.length === 0) {
+        return res.status(400).json({ error: 'User ID and items are required' });
+    }
+
+    // Calculate total amount and construct order data
+    let totalAmount = 0;
+    items.forEach(item => {
+        totalAmount += item.quantity * item.price_per_unit;
+    });
+
+    // Begin a database transaction
+    connection.beginTransaction(err => {
+        if (err) {
+            console.error('Error starting transaction:', err.stack);
+            res.status(500).json({ error: 'Internal server error' });
+            return;
+        }
+
+        // Insert order into the orders table
+        connection.query('INSERT INTO orders (user_id, total_amount) VALUES (?, ?)', [user_id, totalAmount], (err, results) => {
+            if (err) {
+                console.error('Error inserting order:', err.stack);
+                connection.rollback(() => {
+                    res.status(500).json({ error: 'Internal server error' });
+                });
+                return;
+            }
+
+            const orderId = results.insertId;
+
+            // Insert order items into the order_items table
+            const values = items.map(item => [orderId, item.product_id, item.quantity, item.price_per_unit]);
+            connection.query('INSERT INTO order_items (order_id, product_id, quantity, price_per_unit) VALUES ?', [values], (err) => {
+                if (err) {
+                    console.error('Error inserting order items:', err.stack);
+                    connection.rollback(() => {
+                        res.status(500).json({ error: 'Internal server error' });
+                    });
+                    return;
+                }
+
+                // Update product stock
+                items.forEach(item => {
+                    connection.query('UPDATE products SET quantity = quantity - ? WHERE id = ?', [item.quantity, item.product_id], (err) => {
+                        if (err) {
+                            console.error('Error updating product stock:', err.stack);
+                            connection.rollback(() => {
+                                res.status(500).json({ error: 'Internal server error' });
+                            });
+                            return;
+                        }
+                    });
+                });
+
+                // Commit the transaction if all queries succeeded
+                connection.commit(err => {
+                    if (err) {
+                        console.error('Error committing transaction:', err.stack);
+                        connection.rollback(() => {
+                            res.status(500).json({ error: 'Internal server error' });
+                        });
+                        return;
+                    }
+
+                    res.status(201).json({ message: 'Order processed successfully', orderId: orderId });
+                });
+            });
+        });
+    });
+});
+
+// endpoint to fetch orders of respective users
+
+// Endpoint to fetch user orders based on user ID
+// Endpoint to fetch user orders with order items based on user ID
+// Define a route to fetch orders by user ID
+app.get('/orders/:userId', (req, res) => {
+    const userId = req.params.userId;
+
+    // Execute SQL query to select orders for the specific user ID
+    connection.query('SELECT orders.id as order_id, order_items.product_id, order_items.quantity, order_items.price_per_unit, order_items.status, orders.order_date FROM orders JOIN order_items ON orders.id = order_items.order_id WHERE orders.user_id = ?', userId, (err, results) => {
+        if (err) {
+            console.error('Error fetching orders:', err.stack);
+            res.status(500).json({ error: 'Internal server error' });
+            return;
+        }
+
+        // If no orders found for the user
+        if (results.length === 0) {
+            res.status(404).json({ error: 'No orders found for the user' });
+            return;
+        }
+
+        // Orders found, send back the order data
+        res.status(200).json(results);
+    });
+});
+
+
+
+
+
 // Endpoint to fetch user ID based on email
 app.get('/login_id', (req, res) => {
     const { email } = req.query;

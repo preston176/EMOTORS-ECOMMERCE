@@ -15,6 +15,7 @@ import UserProfile from './Pages/UserProfile'
 import { UserAuthContext } from './Context/UserAuthContext'
 import OrderLoginPage from './Pages/OrderLoginPage'
 import OrderSignupPage from './Pages/OrderSignupPage'
+import ThankYou from './Pages/ThankYou';
 
 
 const App = () => {
@@ -51,6 +52,7 @@ const App = () => {
             {/* Alternative login / signup pages */}
             <Route path='/order-login-page' element={<OrderLoginPage />} />
             <Route path='/order-signup-page' element={<OrderSignupPage />} />
+            <Route path='/thank-you' element={<ThankYou />} />
           </Routes>
           <Footer />
         </UserAuthContext.Provider>
