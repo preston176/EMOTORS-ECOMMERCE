@@ -13,6 +13,7 @@ const UserProfile = () => {
                 const ordersResponse = await fetch(`http://localhost:3000/orders/${userId}`);
                 if (ordersResponse.ok) {
                     const ordersData = await ordersResponse.json();
+                    console.log(ordersData)
                     setUserOrders(ordersData);
                 } else {
                     console.error('Error fetching user orders');
@@ -24,6 +25,7 @@ const UserProfile = () => {
 
         fetchUserOrders();
     }, [userId]);
+
 
     return (
         <>
@@ -57,7 +59,7 @@ const UserProfile = () => {
                                 {userOrders.map(order => (
                                     <tr key={order.order_id}>
                                         <td>{order.order_id}</td>
-                                        <td>{order.product_name}</td> {/* Assuming you have a product name in your schema */}
+                                        <td>{order.name}</td> {/* Assuming you have a product name in your schema */}
                                         <td>{order.quantity}</td>
                                         <td>{order.price_per_unit}</td>
                                         <td>{(order.quantity * order.price_per_unit).toFixed(2)}</td>
