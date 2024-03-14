@@ -48,7 +48,7 @@ const LoginSignUp = () => {
     };
 
     // Make a POST request to your backend API to create a new user
-    fetch("http://localhost:3000/signup", {
+    fetch("http://localhost:3000/signUp", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -105,7 +105,7 @@ app.get('/images/:productId', (req, res) => {
 });
 
 // Endpoint for user signup
-app.post('/signup', (req, res) => {
+app.post('/signUp', (req, res) => {
     const { username, email, password, phone } = req.body;
 
     // Check if any field is missing
