@@ -10,8 +10,8 @@ const CartItems = () => {
 
 
     return (
-        <div className='cartitems'>
-            <div className="cartitems-format-main">
+        <div className='cart-items'>
+            <div className="cart-items-format-main">
                 <p>Products</p>
                 <p>Title</p>
                 <p>Price</p>
@@ -23,11 +23,11 @@ const CartItems = () => {
             {all_product.map((e) => {
                 if (cartItems[e.id] > 0) {
                     return <div key={crypto.randomUUID()}>
-                        <div className="cartitems-format cartitems-format-main">
-                            <img src={e.image} alt="" className='carticon-product-icon' />
+                        <div className="cart-items-format cart-items-format-main">
+                            <img src={e.image} alt="" className='cart-icon-product-icon' />
                             <p>{e.name}</p>
                             <p>kes {e.new_price}</p>
-                            <button className='cartitems-quantity'>{cartItems[e.id]}</button>
+                            <button className='cart-items-quantity'>{cartItems[e.id]}</button>
                             <p>kes {e.new_price * cartItems[e.id]}</p>
                             <img src={remove_icon} onClick={() => { removeFromCart(e.id) }} alt="" />
                         </div>

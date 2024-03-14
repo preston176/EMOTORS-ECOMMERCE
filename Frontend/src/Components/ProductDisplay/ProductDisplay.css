@@ -1,41 +1,41 @@
-.productdisplay {
+.product-display {
   display: flex;
   margin: 0px 160px;
 }
-.productdisplay-left {
+.product-display-left {
   display: flex;
   gap: 20px;
 }
 
-.productdisplay-img-list {
+.product-display-img-list {
   display: flex;
   flex-direction: column;
   gap: 16px;
   margin-right: 20px;
 }
 
-.productdisplay-img-list img {
+.product-display-img-list img {
   height: 10px;
 }
 
-.productdisplay-main-img {
+.product-display-main-img {
   width: 600px;
   height: 400px;
 }
 
-.productdisplay-right {
+.product-display-right {
   margin: 0px 70px;
   display: flex;
   flex-direction: column;
 }
 
-.productdisplay-right h1 {
+.product-display-right h1 {
   color: #3d3d3d;
   font-size: 40px;
   font-weight: 700;
 }
 
-.productdisplay-right-stars {
+.product-display-right-stars {
   display: flex;
   align-items: center;
   margin-top: 13px;
@@ -44,7 +44,7 @@
   font-size: 16px;
 }
 
-.productdisplay-right-prices {
+.product-display-right-prices {
   display: flex;
   margin: 5px 0px;
   gap: 20px;
@@ -52,28 +52,28 @@
   font-weight: 700;
 }
 
-.productdisplay-right-price-new {
+.product-display-right-price-new {
   color: #ff4141;
 }
-.productdisplay-right-price-new span {
+.product-display-right-price-new span {
   color: black;
   font-weight: bolder;
 }
 
-.productdisplay-right-size h1 {
+.product-display-right-size h1 {
   margin-top: 50px;
   color: #656565;
   font-size: 20px;
   font-weight: 600;
 }
 
-.productdisplay-right-sizes {
+.product-display-right-sizes {
   display: flex;
   margin: 30px 0px;
   gap: 20px;
 }
 
-.productdisplay-right-sizes div {
+.product-display-right-sizes div {
   padding: 18px 24px;
   background: #fbfbfb;
   border: 1px solid #ebebeb;
@@ -81,7 +81,7 @@
   cursor: pointer;
 }
 
-.productdisplay-right button {
+.product-display-right button {
   padding: 20px 40px;
   width: 200px;
   font-size: 16px;
@@ -93,25 +93,25 @@
   outline: none;
   cursor: pointer;
 }
-.productdisplay-right-description {
+.product-display-right-description {
   display: flex;
   flex-direction: column;
   min-width: fit-content;
   max-width: 200px;
 }
-.productdisplay-right-description p {
+.product-display-right-description p {
   font-size: 1.2rem;
 }
 
-.productdisplay-right-category {
+.product-display-right-category {
   margin-top: 10px;
 }
 
-.productdisplay-right-category span {
+.product-display-right-category span {
   font-weight: 600;
 }
 
-.productdisplay-quantity {
+.product-display-quantity {
   display: flex;
   flex-direction: column;
 }

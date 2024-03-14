@@ -5,10 +5,10 @@ import Item from './../Item/Item';
 
 const RelatedProducts = () => {
     return (
-        <div className='relatedproducts'>
+        <div className='related-products'>
             <h1>Related Products</h1>
             <hr />
-            <div className="relatedproducts-item">
+            <div className="related-products-item">
                 {
                     data_product.map((item, index) => (
                         <Item key={crypto.randomUUID()}

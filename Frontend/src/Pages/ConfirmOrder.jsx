@@ -4,7 +4,7 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 import "./CSS/ConfirmOrder.css";
 import GooglePayButton from "@google-pay/button-react";
 import { UserAuthContext } from "../Context/UserAuthContext";
-import OrderSignupPage from "./OrderSignupPage";
+import OrderSignUpPage from "./OrderSignUpPage";
 import { toast } from "react-toastify";
 
 const currentDate = new Date().toDateString();
@@ -117,7 +117,7 @@ const ConfirmOrder = () => {
   };
 
   const processOrder = () => {
-    // funciton to communicate with backend to handle proceessing of order
+    // function to communicate with backend to handle processing of order
     // it will get order details, submit to the order table and do quantity - 1;
     // then it will navigate the person to thank you page where there is also a button to navigate to orders section
     fetch("http://localhost:3000/process_order", {
@@ -152,7 +152,7 @@ const ConfirmOrder = () => {
   };
 
   return !isAuth ? (
-    <OrderSignupPage />
+    <OrderSignUpPage />
   ) : (
     <div className="confirm-order">
       <h2>Thank You for Shopping with us</h2>
@@ -217,9 +217,9 @@ const ConfirmOrder = () => {
                     value={userDetails.email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
-                  <label htmlFor="phonenumber">Phone Number</label>
+                  <label htmlFor="phone-number">Phone Number</label>
                   <input
-                    id="phonenumber"
+                    id="phone-number"
                     required
                     type="text"
                     placeholder="Phone Number"

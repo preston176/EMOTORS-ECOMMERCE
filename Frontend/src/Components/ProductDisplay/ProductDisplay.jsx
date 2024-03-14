@@ -11,7 +11,7 @@ const ProductDisplay = ({ product }) => {
     const { quantity, setQuantity } = useContext(UserAuthContext);
     // const { addToCart } = useContext(ShopContext)
 
-    // set quantity to 1 on page loading or 0 when stock isnt available
+    // set quantity to 1 on page loading or 0 when stock isn't available
     useEffect(() => {
         if (product.quantity > 0) {
             setQuantity(1);
@@ -48,9 +48,9 @@ const ProductDisplay = ({ product }) => {
 
 
     return (
-        <div className='productdisplay'>
-            <div className="productdisplay-left">
-                {/* <div className="productdisplay-img-list">
+        <div className='product-display'>
+            <div className="product-display-left">
+                {/* <div className="product-display-img-list">
                     <img src={product.image} alt="" />
                     <img src={product.image} alt="" />
                     <img src={product.image} alt="" />
@@ -58,22 +58,22 @@ const ProductDisplay = ({ product }) => {
                     <img src={product.image} alt="" />
                 </div> */}
             </div>
-            <div className="productdisplay-img">
-                <img className='productdisplay-main-img' src={product.image} alt="" />
+            <div className="product-display-img">
+                <img className='product-display-main-img' src={product.image} alt="" />
             </div>
-            <div className="productdisplay-right">
+            <div className="product-display-right">
                 <h1>{product.name}</h1>
-                <div className="productdisplay-right-star">
+                <div className="product-display-right-star">
                     <img src={star_icon} alt="" />
                     <img src={star_icon} alt="" />
                     <img src={star_icon} alt="" />
                     <img src={star_icon} alt="" />
                     <img src={star_dull_icon} alt="" />
                 </div>
-                <div className="product-instock">
+                <div className="product-in-stock">
                     <span>In stock: </span> {product.quantity}
                 </div>
-                <div className="productdisplay-quantity">
+                <div className="product-display-quantity">
                     <h4>Quantity:</h4>
                     <div className="product-quantity">
                         <button className='qty-dec' onClick={handleReduceQty}>-</button>
@@ -81,29 +81,29 @@ const ProductDisplay = ({ product }) => {
                         <button className='qty-inc' onClick={handleIncreaseQty}>+</button>
                     </div>
                 </div>
-                <div className="productdisplay-right-prices">
-                    <div className="productdisplay-right-price-new">
+                <div className="product-display-right-prices">
+                    <div className="product-display-right-price-new">
                         <span>Price</span> Kes{product.price}
                         <div className="price-desc">Per quantity</div>
                     </div>
                 </div>
 
                 <hr />
-                <div className="productdisplay-right-prices">
-                    <div className="productdisplay-right-price-total">
+                <div className="product-display-right-prices">
+                    <div className="product-display-right-price-total">
                         <span>Total</span> Kes{product.price * quantity}
                         <div className="price-desc">To be paid</div>
                     </div>
                 </div>
-                <div className="productdisplay-right-description">
+                <div className="product-display-right-description">
                     <h4>Description: </h4>
                     <p>{product.description}</p>
 
                 </div>
 
-                {/* <div className="productdisplay-right-size">
+                {/* <div className="product-display-right-size">
                     <h1>Select Size</h1>
-                    <div className="productdisplay-size-sizes">
+                    <div className="product-display-size-sizes">
                         <div className="">S</div>
                         <div className="">M</div>
                         <div className="">L</div>
@@ -113,7 +113,7 @@ const ProductDisplay = ({ product }) => {
                 </div> */}
                 {/* <button onClick={() => handleNavigate(product.id)}>Purchase</button> */}
                 {product.quantity ? (<button onClick={() => handleNavigate(product.id)}>Purchase</button>) : (<button className='btn-disabled' disabled>Out of Stock </button>)}
-                <p className='productdisplay-right-category'><span>Category :</span>{product.category}</p>
+                <p className='product-display-right-category'><span>Category :</span>{product.category}</p>
 
             </div>
 

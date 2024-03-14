@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import "./Css/LoginSignup.css";
+import "./Css/LoginSignUp.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -65,7 +65,7 @@ const Login = () => {
 
         // Show success message or navigate to the user profile page
         toast.success("Login successful");
-        navigate(`/loginpage/${userDetails.id}/profile`);
+        navigate(`/loginPage/${userDetails.id}/profile`);
 
         // Proceed with user authentication
         handleUserAuth();
@@ -95,11 +95,11 @@ const Login = () => {
         style={{ width: "400px", fontSize: "1.5rem" }}
       />
 
-      <div className="loginsignup">
-        <div className="loginsignup-container">
+      <div className="login-sign-up">
+        <div className="login-sign-up-container">
           <h1>Login</h1>
           <form onSubmit={handleLogin}>
-            <div className="loginsignup-fields">
+            <div className="login-sign-up-fields">
               <input
                 required
                 value={email}
@@ -117,10 +117,10 @@ const Login = () => {
             </div>
             <button onClick={handleLogin}>Login</button>
           </form>
-          <p className="loginsignup-login">
+          <p className="login-sign-up-login">
             Don't have an account?{" "}
             <span>
-              <Link to={"/signup"}>Sign Up</Link>
+              <Link to={"/signUp"}>Sign Up</Link>
             </span>
           </p>
         </div>

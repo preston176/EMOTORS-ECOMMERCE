@@ -1,4 +1,4 @@
-.relatedproducts {
+.related-products {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,20 +6,20 @@
   height: 90vh;
 }
 
-.relatedproducts h1 {
+.related-products h1 {
   color: #171717;
   font-size: 50px;
   font-weight: 600;
 }
 
-.relatedproducts hr {
+.related-products hr {
   width: 200px;
   height: 6px;
   border-radius: 10px;
   background: #252525;
 }
 
-.relatedproducts-item {
+.related-products-item {
   margin-top: 50px;
   display: flex;
   flex-direction: row;

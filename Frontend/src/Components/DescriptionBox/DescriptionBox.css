@@ -1,13 +1,13 @@
-.descriptionbox {
+.description-box {
   margin: 120px 170px;
 }
 
-.descriptionbox-navigator {
+.description-box-navigator {
   display: flex;
   margin-bottom: 20px; /* Add margin bottom for spacing */
 }
 
-.descriptionbox-nav-box {
+.description-box-nav-box {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,16 +20,16 @@
   transition: background-color 0.3s, color 0.3s; /* Add transition for smooth hover effect */
 }
 
-.descriptionbox-nav-box.fade {
+.description-box-nav-box.fade {
   background: #fbfbfb;
   color: #555;
 }
 
-.descriptionbox-nav-box:hover {
+.description-box-nav-box:hover {
   background: #f0f0f0; /* Change background on hover */
 }
 
-.descriptionbox-description {
+.description-box-description {
   display: flex;
   flex-direction: column;
   gap: 25px;

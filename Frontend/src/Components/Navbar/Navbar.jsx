@@ -19,7 +19,7 @@ const Navbar = () => {
         } else {
             // Redirect to login page
             setUserDetails(null);
-            navigate('/loginpage');
+            navigate('/loginPage');
         }
 
 
@@ -44,7 +44,7 @@ const Navbar = () => {
                 {/* if the user is authenticated and his / her user id exists then render this */}
                 {
                     userDetails && isAuth && (
-                       <Link to={`/loginpage/${userDetails.id}/profile`}> <h2>View Orders</h2></Link>
+                       <Link to={`/loginPage/${userDetails.id}/profile`}> <h2>View Orders</h2></Link>
                     )
                 }
             </div>
