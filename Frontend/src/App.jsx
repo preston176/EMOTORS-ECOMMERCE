@@ -46,9 +46,9 @@ const App = () => {
             <Route path='/product' element={<Product />}>       <Route path=':productId' element={<Product />} />
             </Route>
             <Route path="/product/:productId/confirm-order" element={<ConfirmOrder />} />
-            <Route path="/signup" element={<LoginSignup />} />
-            <Route path='/loginpage' element={<Login />} />
-            <Route path='/loginpage/:userId/profile' element={<UserProfile />} />
+            <Route path="/signUp" element={<LoginSignUp />} />
+            <Route path='/loginPage' element={<Login />} />
+            <Route path='/loginPage/:userId/profile' element={<UserProfile />} />
             {/* Alternative login / signup pages */}
             <Route path='/order-login-page' element={<OrderLoginPage />} />
             <Route path='/order-signup-page' element={<OrderSignupPage />} />
