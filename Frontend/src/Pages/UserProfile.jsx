@@ -13,7 +13,7 @@ const UserProfile = () => {
                 const ordersResponse = await fetch(`http://localhost:3000/orders/${userId}`);
                 if (ordersResponse.ok) {
                     const ordersData = await ordersResponse.json();
-                    console.log(ordersData)
+                    // console.log(ordersData)
                     setUserOrders(ordersData);
                 } else {
                     console.error('Error fetching user orders');

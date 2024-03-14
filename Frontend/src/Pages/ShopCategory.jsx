@@ -28,7 +28,7 @@ const ShopCategory = (props) => {
 
   }, []);
 
-  const { all_product } = useContext(ShopContext)
+  // const { all_product } = useContext(ShopContext)
   const [bikes, setBikes] = useState([]);
 
 
@@ -56,7 +56,6 @@ const ShopCategory = (props) => {
                 name={item.name}
                 image={item.image}
                 new_price={item.price}
-
               />
             );
           } else {
