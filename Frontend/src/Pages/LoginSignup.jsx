@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import "./Css/LoginSignup.css";
+import "./Css/LoginSignUp.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../Components/Navbar/Navbar";
 
-const LoginSignup = () => {
+const LoginSignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -14,7 +14,7 @@ const LoginSignup = () => {
 
   const navigate = useNavigate();
 
-  const handleSignup = () => {
+  const handleSignUp = () => {
     // Perform form validation
     if (!name || !email || !password || !confirmPassword || !phone) {
       // alert('Please fill in all fields');
@@ -60,7 +60,7 @@ const LoginSignup = () => {
           // User created successfully, you can redirect or show a success message
           // alert('User created successfully');
           toast.success("User created successfully");
-          navigate("/loginpage");
+          navigate("/loginPage");
         } else {
           // Error occurred during user creation, handle accordingly
           // alert('Failed to create user');
@@ -90,10 +90,10 @@ const LoginSignup = () => {
         style={{ width: "400px", fontSize: "1.5rem" }}
       />
       <Navbar />
-      <div className="loginsignup">
-        <div className="loginsignup-container">
+      <div className="login-sign-up">
+        <div className="login-sign-up-container">
           <h1>Sign Up</h1>
-          <div className="loginsignup-fields">
+          <div className="login-sign-up-fields">
             <input
               required
               value={name}
@@ -135,12 +135,12 @@ const LoginSignup = () => {
               placeholder="Confirm password"
             />
           </div>
-          <button onClick={handleSignup}>Sign Up</button>
-          <p className="loginsignup-login">
+          <button onClick={handleSignUp}>Sign Up</button>
+          <p className="login-sign-up-login">
             Already have an account?{" "}
             <span>
               {" "}
-              <Link to={"/loginpage"}>Login</Link>
+              <Link to={"/loginPage"}>Login</Link>
             </span>
           </p>
         </div>
@@ -149,4 +149,4 @@ const LoginSignup = () => {
   );
 };
 
-export default LoginSignup;
+export default LoginSignUp;

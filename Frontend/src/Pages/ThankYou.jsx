@@ -22,7 +22,7 @@ const ThankYou = () => {
 
       <div className="">
         You can track your order from{" "}
-        <Link to={`/loginpage/${userDetails.id}/profile`}>
+        <Link to={`/loginPage/${userDetails.id}/profile`}>
           <button className="button">Here</button>
         </Link>
       </div>

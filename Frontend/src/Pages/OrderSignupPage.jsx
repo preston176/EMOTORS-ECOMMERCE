@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
-import "./Css/LoginSignup.css";
+import "./Css/LoginSignUp.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../Components/Navbar/Navbar";
 import { UserAuthContext } from "../Context/UserAuthContext";
 
-const OrderSignupPage = () => {
+const OrderSignUpPage = () => {
   const { isAuth, handleUserAuth, setActiveUserId, setUserDetails } =
     useContext(UserAuthContext);
 
@@ -18,7 +18,7 @@ const OrderSignupPage = () => {
 
   const navigate = useNavigate();
 
-  const handleSignup = () => {
+  const handleSignUp = () => {
     // Perform form validation
     if (!name || !email || !password || !confirmPassword || !phone) {
       // alert('Please fill in all fields');
@@ -95,10 +95,10 @@ const OrderSignupPage = () => {
         style={{ width: "400px", fontSize: "1.5rem" }}
       />
 
-      <div className="loginsignup">
-        <div className="loginsignup-container">
+      <div className="login-sign-up">
+        <div className="login-sign-up-container">
           <h1>Sign Up</h1>
-          <div className="loginsignup-fields">
+          <div className="login-sign-up-fields">
             <input
               required
               value={name}
@@ -140,8 +140,8 @@ const OrderSignupPage = () => {
               placeholder="Confirm password"
             />
           </div>
-          <button onClick={handleSignup}>Sign Up</button>
-          <p className="loginsignup-login">
+          <button onClick={handleSignUp}>Sign Up</button>
+          <p className="login-sign-up-login">
             Already have an account?{" "}
             <span>
               {" "}
@@ -154,4 +154,4 @@ const OrderSignupPage = () => {
   );
 };
 
-export default OrderSignupPage;
+export default OrderSignUpPage;
