@@ -8,7 +8,7 @@
 4. For backend install [xampp](https://www.apachefriends.org/download.html) and import the `e-cycle_db.sql` schema file into the database.
 5. Run `npm install` in both directories
 6. Run `npm start or npm run dev` in both directories
-7. Open browser navigate to `https://localhost:5173`
+7. Open browser navigate to the link `https://localhost:5173`
 
 ## Features
 1. User can login and register
