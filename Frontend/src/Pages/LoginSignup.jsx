@@ -91,7 +91,7 @@ const LoginSignup = () => {
                 theme="light"
                 style={{ width: '400px', fontSize: '1.5rem' }}
             />
-            <Navbar />
+
             <div className='loginsignup'>
                 <div className="loginsignup-container">
                     <h1>Sign Up</h1>
