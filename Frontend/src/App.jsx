@@ -5,7 +5,7 @@ import Shop from './Pages/Shop'
 import ShopCategory from './Pages/ShopCategory'
 import Product from './Pages/Product'
 import ConfirmOrder from './Pages/ConfirmOrder'
-import LoginSignup from './Pages/LoginSignup'
+import LoginSignUp from './Pages/LoginSignUp'
 import Footer from './Components/Footer/Footer'
 import men_banner from './Components/Assets/banner_mens.png'
 import women_banner from './Components/Assets/banner_women.png'
@@ -14,7 +14,7 @@ import Login from './Pages/Login'
 import UserProfile from './Pages/UserProfile'
 import { UserAuthContext } from './Context/UserAuthContext'
 import OrderLoginPage from './Pages/OrderLoginPage'
-import OrderSignupPage from './Pages/OrderSignupPage'
+import OrderSignUpPage from './Pages/OrderSignUpPage'
 import ThankYou from './Pages/ThankYou';
 
 
