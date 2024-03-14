@@ -36,7 +36,7 @@ const Navbar = () => {
             <ul className='nav-menu'>
                 <li><Link to='/'>Shop</Link> <hr /></li>
                 <li><Link to='/mens'>Men</Link></li>
-                <li><Link to='/womens'>Women</Link></li>
+                <li><Link to="/women's">Women</Link></li>
                 <li><Link to='/kids'>Kids</Link></li>
             </ul>
             <div className='nav-login-cart'>

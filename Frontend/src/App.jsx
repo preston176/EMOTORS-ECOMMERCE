@@ -41,7 +41,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Shop />} />
             <Route path="/mens" element={<ShopCategory banner={men_banner} category="men" />} />
-            <Route path="/womens" element={<ShopCategory banner={women_banner} category="women" />} />
+            <Route path="/women's" element={<ShopCategory banner={women_banner} category="women" />} />
             <Route path="/kids" element={<ShopCategory banner={kid_banner} category="kid" />} />
             <Route path='/product' element={<Product />}>       <Route path=':productId' element={<Product />} />
             </Route>
@@ -49,9 +49,9 @@ const App = () => {
             <Route path="/signUp" element={<LoginSignUp />} />
             <Route path='/loginPage' element={<Login />} />
             <Route path='/loginPage/:userId/profile' element={<UserProfile />} />
-            {/* Alternative login / signup pages */}
+            {/* Alternative login / signUp pages */}
             <Route path='/order-login-page' element={<OrderLoginPage />} />
-            <Route path='/order-signup-page' element={<OrderSignupPage />} />
+            <Route path='/order-sign-up-page' element={<OrderSignUpPage />} />
             <Route path='/thank-you' element={<ThankYou />} />
           </Routes>
           <Footer />
