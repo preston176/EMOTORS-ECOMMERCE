@@ -235,8 +235,9 @@ app.post('/process_order', (req, res) => {
             const orderId = results.insertId;
 
             // Insert order items into the order_items table
-            const values = items.map(item => [orderId, item.product_id, item.quantity, item.price_per_unit]);
-            connection.query('INSERT INTO order_items (order_id, product_id, quantity, price_per_unit) VALUES ?', [values], (err) => {
+            // By default: Make the order status to be pending
+            const values = items.map(item => [orderId, item.product_id, item.quantity, item.price_per_unit, "pending"]);
+            connection.query('INSERT INTO order_items (order_id, product_id, quantity, price_per_unit,status) VALUES ?', [values], (err) => {
                 if (err) {
                     console.error('Error inserting order items:', err.stack);
                     connection.rollback(() => {
@@ -284,7 +285,7 @@ app.get('/orders/:userId', (req, res) => {
     const userId = req.params.userId;
 
     // Execute SQL query to select orders for the specific user ID
-    connection.query('SELECT orders.id as order_id, order_items.product_id, order_items.quantity, order_items.price_per_unit, order_items.status, orders.order_date FROM orders JOIN order_items ON orders.id = order_items.order_id WHERE orders.user_id = ?', userId, (err, results) => {
+    connection.query('SELECT orders.id AS order_id, order_items.product_id, order_items.quantity, order_items.price_per_unit, order_items.status, orders.order_date, products.name FROM orders JOIN order_items ON orders.id = order_items.order_id JOIN products ON order_items.product_id = products.id WHERE orders.user_id = ?', userId, (err, results) => {
         if (err) {
             console.error('Error fetching orders:', err.stack);
             res.status(500).json({ error: 'Internal server error' });
@@ -301,6 +302,7 @@ app.get('/orders/:userId', (req, res) => {
         res.status(200).json(results);
     });
 });
+
 
 
 
