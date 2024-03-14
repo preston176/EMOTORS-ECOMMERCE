@@ -1,13 +1,37 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './CSS/ShopCategory.css'
-import all_product from './../Components/Assets/all_product';
+
 import { ShopContext } from '../Context/ShopContext';
 import dropdown_icon from '../Components/Assets/dropdown_icon.png'
 import Item from '../Components/Item/Item';
 
 
 const ShopCategory = (props) => {
+
+  useEffect(() => {
+    fetch('http://localhost:3000/products',
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        setBikes(data);
+        console.log(data)
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
+
+  }, []);
+
   const { all_product } = useContext(ShopContext)
+  const [bikes, setBikes] = useState([]);
+
+
 
 
 
@@ -23,7 +47,7 @@ const ShopCategory = (props) => {
         </div>
       </div>
       <div className="shopcategory-products">
-        {all_product.map((item, index) => {
+        {bikes.map((item, index) => {
           if (props.category === item.category) {
             return (
               <Item
@@ -31,8 +55,8 @@ const ShopCategory = (props) => {
                 id={item.id}
                 name={item.name}
                 image={item.image}
-                new_price={item.new_price}
-                old_price={item.old_price}
+                new_price={item.price}
+
               />
             );
           } else {

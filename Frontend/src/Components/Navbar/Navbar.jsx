@@ -35,7 +35,7 @@ const Navbar = () => {
             </Link>
             <ul className='nav-menu'>
                 <li><Link to='/'>Shop</Link> <hr /></li>
-                <li><Link to='/mens'>Men</Link></li>
+                <li><Link to='/casual'>Casual</Link></li>
                 <li><Link to='/womens'>Women</Link></li>
                 <li><Link to='/kids'>Kids</Link></li>
             </ul>
@@ -44,7 +44,7 @@ const Navbar = () => {
                 {/* if the user is authenticated and his / her user id exists then render this */}
                 {
                     userDetails && isAuth && (
-                       <Link to={`/loginpage/${userDetails.id}/profile`}> <h2>View Orders</h2></Link>
+                        <Link to={`/loginpage/${userDetails.id}/profile`}> <h2>View Orders</h2></Link>
                     )
                 }
             </div>

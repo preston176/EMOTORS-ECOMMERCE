@@ -4,8 +4,8 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import "./CSS/ConfirmOrder.css";
 import GooglePayButton from '@google-pay/button-react';
 import { UserAuthContext } from '../Context/UserAuthContext';
-import OrderSignupPage from './OrderSignupPage';
 import { toast } from 'react-toastify';
+import OrderLoginPage from './OrderLoginPage';
 
 const currentDate = new Date().toDateString();
 const currentTime = new Date().toLocaleTimeString();
@@ -146,7 +146,7 @@ const ConfirmOrder = () => {
     }
 
     return (
-        !isAuth ? <OrderSignupPage /> : (
+        !isAuth ? <OrderLoginPage /> : (
             <div className='confirm-order'>
                 <h2>Thank You for Shopping with us</h2>
                 <p>Here is a summary of your order details</p>
