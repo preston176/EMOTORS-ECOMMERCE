@@ -13,11 +13,6 @@ const Login = () => {
     const [password, setPassword] = useState('');
 
     const navigate = useNavigate();
-
-    const handleOnAdminLoginButton = () => {
-        navigate('/adminloginpage')
-    }
-
     const handleLogin = async (e) => {
         e.preventDefault();
 
@@ -31,7 +26,7 @@ const Login = () => {
         const userData = {
             email: email,
             password: password,
-            role: "user"
+            role: "admin"
         };
 
         try {
@@ -72,7 +67,7 @@ const Login = () => {
 
                 // Show success message or navigate to the user profile page
                 toast.success('Login successful');
-                navigate(`/loginpage/${userDetails.id}/profile`);
+                navigate(`/adminloginpage/${userDetails.id}/admin`);
 
                 // Proceed with user authentication
                 handleUserAuth();
@@ -106,8 +101,8 @@ const Login = () => {
             <div className='loginsignup'>
                 <div className="loginsignup-container">
                     <div className="logincontainers">
-                        <h1>Login</h1>
-                        <p onClick={handleOnAdminLoginButton}>Admin Login</p>
+                        <h1>Admin Login</h1>
+
                     </div>
                     <form onSubmit={handleLogin} >
                         <div className="loginsignup-fields">
@@ -116,7 +111,7 @@ const Login = () => {
                         </div>
                         <button onClick={handleLogin}>Login</button>
                     </form>
-                    <p className='loginsignup-login'>Don't have an account? <span><Link to={"/signup"}>Sign Up</Link></span></p>
+
 
                 </div>
             </div>

@@ -172,7 +172,7 @@ app.post('/order-confirmation', (req, res) => {
 
 // Endpoint for user login
 app.post('/login', (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, role } = req.body;
 
     // Check if any field is missing
     if (!email || !password) {
@@ -180,7 +180,7 @@ app.post('/login', (req, res) => {
     }
 
     // Check if the user exists in the database and the provided credentials match
-    connection.query('SELECT * FROM Users WHERE email = ? AND password = ? ', [email, password], (err, results) => {
+    connection.query('SELECT * FROM Users WHERE email = ? AND password = ? AND role = ?', [email, password, role], (err, results) => {
         if (err) {
             console.error('Error executing login query:', err.stack);
             res.status(500).json({ error: 'Internal server error' });
@@ -303,6 +303,48 @@ app.get('/orders/:userId', (req, res) => {
     });
 });
 
+app.get('/orders', (req, res) => {
+    // Execute SQL query to select all orders along with user details
+    connection.query('SELECT orders.id AS order_id, orders.user_id, users.username, users.email, order_items.product_id, order_items.quantity, order_items.price_per_unit, order_items.status, orders.order_date, products.name FROM orders JOIN order_items ON orders.id = order_items.order_id JOIN products ON order_items.product_id = products.id JOIN users ON orders.user_id = users.id', (err, results) => {
+        if (err) {
+            console.error('Error fetching orders:', err.stack);
+            res.status(500).json({ error: 'Internal server error' });
+            return;
+        }
+
+        // If no orders found
+        if (results.length === 0) {
+            res.status(404).json({ error: 'No orders found' });
+            return;
+        }
+
+        // Orders found, send back the order data
+        res.status(200).json(results);
+    });
+});
+
+// route to update user order from pending to complete
+app.put('/orders/:orderId/complete', (req, res) => {
+    const orderId = req.params.orderId;
+
+    // Execute SQL query to update the status of the order to "completed"
+    connection.query('UPDATE order_items SET status = "completed" WHERE order_id = ?', orderId, (err, results) => {
+        if (err) {
+            console.error('Error updating order status:', err.stack);
+            res.status(500).json({ error: 'Internal server error' });
+            return;
+        }
+
+        // If no rows were affected, it means the order with the specified ID was not found
+        if (results.affectedRows === 0) {
+            res.status(404).json({ error: 'Order not found' });
+            return;
+        }
+
+        // Order status updated successfully
+        res.status(200).json({ message: 'Order status updated to completed' });
+    });
+});
 
 
 

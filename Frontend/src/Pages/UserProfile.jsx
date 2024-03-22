@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './CSS/UserProfile.css';
 import { useParams } from 'react-router-dom';
 

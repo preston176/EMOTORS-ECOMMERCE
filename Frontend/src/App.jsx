@@ -16,6 +16,9 @@ import { UserAuthContext } from './Context/UserAuthContext'
 import OrderLoginPage from './Pages/OrderLoginPage'
 import OrderSignupPage from './Pages/OrderSignupPage'
 import ThankYou from './Pages/ThankYou';
+import AdminPage from './Pages/AdminPage';
+import AdminLoginPage from './Pages/AdminLoginPage'
+import AdminUserOrdersPage from './Pages/AdminUserOrdersPage'
 
 
 const App = () => {
@@ -48,7 +51,10 @@ const App = () => {
             <Route path="/product/:productId/confirm-order" element={<ConfirmOrder />} />
             <Route path="/signup" element={<LoginSignup />} />
             <Route path='/loginpage' element={<Login />} />
+            <Route path='/adminloginpage' element={<AdminLoginPage />} />
             <Route path='/loginpage/:userId/profile' element={<UserProfile />} />
+            <Route path='/adminloginpage/:userId/admin' element={<AdminPage />} />
+            <Route path='/adminloginpage/:userId/adminuserorders' element={<AdminUserOrdersPage />} />
             {/* Alternative login / signup pages */}
             <Route path='/order-login-page' element={<OrderLoginPage />} />
             <Route path='/order-signup-page' element={<OrderSignupPage />} />

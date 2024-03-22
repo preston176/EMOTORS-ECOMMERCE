@@ -25,7 +25,8 @@ const OrderLoginPage = () => {
         // Prepare the user data to send to the server
         const userData = {
             email: email,
-            password: password
+            password: password,
+            role: "user"
         };
 
         try {

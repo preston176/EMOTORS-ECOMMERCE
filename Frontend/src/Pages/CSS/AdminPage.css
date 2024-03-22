@@ -1,0 +1,31 @@
+.card {
+  display: flex;
+}
+
+.right-admin-section h2 {
+  text-align: center;
+}
+
+.right-admin-section .cards-section {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding: 2rem;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+}
+
+.card-title {
+  text-align: center;
+  padding: 2rem;
+}
+
+.card-text {
+  text-align: center;
+  padding: 1rem;
+}
