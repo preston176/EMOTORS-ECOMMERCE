@@ -42,11 +42,11 @@ const App = () => {
     <div>
       <BrowserRouter>
         <UserAuthContext.Provider value={{ isAuth, handleUserAuth, userDetails, setUserDetails, quantity, setQuantity, userId, setUserId }}>
-          <Navbar  />
+          <Navbar />
           <Routes>
             <Route path="/" element={<Shop />} />
             <Route path="/casual" element={<ShopCategory banner={men_banner} category="Casual" />} />
-            <Route path="/womens" element={<ShopCategory banner={women_banner} category="women" />} />
+            <Route path="/sports" element={<ShopCategory banner={women_banner} category="Sports" />} />
             <Route path="/kids" element={<ShopCategory banner={kid_banner} category="kid" />} />
             <Route path='/product' element={<Product />}>       <Route path=':productId' element={<Product />} />
             </Route>
