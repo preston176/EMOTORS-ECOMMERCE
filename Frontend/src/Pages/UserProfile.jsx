@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './CSS/UserProfile.css';
 import { useParams } from 'react-router-dom';
+import { UserAuthContext } from '../Context/UserAuthContext';
 
 const UserProfile = () => {
     const { userId } = useParams();
+    const { setUserId } = useContext(UserAuthContext);
     const [userOrders, setUserOrders] = useState([]);
 
     useEffect(() => {
@@ -15,6 +17,7 @@ const UserProfile = () => {
                     const ordersData = await ordersResponse.json();
                     // console.log(ordersData)
                     setUserOrders(ordersData);
+                    setUserId(userId);
                 } else {
                     console.error('Error fetching user orders');
                 }
