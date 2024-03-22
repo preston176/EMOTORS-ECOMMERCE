@@ -2,19 +2,28 @@ import React, { useContext } from 'react'
 import './Navbar.css'
 import logo from '../Assets/logo.png'
 import cart_icon from '../Assets/cart_icon.png'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { UserAuthContext } from '../../Context/UserAuthContext'
 
 const Navbar = () => {
+    // fetch current route
+    const location = useLocation().pathname;
+    // check whether current route is for admin or user
+    const isAdminRoute = location.includes('admin');
 
-    const { isAuth, handleUserAuth, userDetails, setUserDetails } = useContext(UserAuthContext);
+    console.log(isAdminRoute)
+
+
+    const { isAuth, handleUserAuth, userDetails, setUserDetails, userId, setUserId } = useContext(UserAuthContext);
 
     const navigate = useNavigate();
 
+
     const handleBtnClick = () => {
-        if (isAuth) {
+        if (isAuth || userId) {
             // Log out the user
             handleUserAuth();
+            setUserId(undefined);
             navigate('/');
         } else {
             // Redirect to login page
@@ -40,10 +49,10 @@ const Navbar = () => {
                 <li><Link to='/kids'>Kids</Link></li>
             </ul>
             <div className='nav-login-cart'>
-                <button onClick={handleBtnClick}>{isAuth ? "Log Out" : "Log In"}</button>
+                <button onClick={handleBtnClick}>{isAuth || userId ? "Log Out" : "Log In"}</button>
                 {/* if the user is authenticated and his / her user id exists then render this */}
                 {
-                    userDetails && isAuth && (
+                    !isAdminRoute && isAuth && (
                         <Link to={`/loginpage/${userDetails.id}/profile`}> <h2>View Orders</h2></Link>
                     )
                 }
