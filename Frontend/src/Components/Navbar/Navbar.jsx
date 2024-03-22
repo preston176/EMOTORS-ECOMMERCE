@@ -10,6 +10,9 @@ const Navbar = () => {
     const location = useLocation().pathname;
     // check whether current route is for admin or user
     const isAdminRoute = location.includes('admin');
+    const isHomePage = location === '/';
+
+
 
 
     const { isAuth, handleUserAuth, userDetails, setUserDetails, userId, setUserId } = useContext(UserAuthContext);
@@ -43,14 +46,14 @@ const Navbar = () => {
             <ul className='nav-menu'>
                 <li><Link to='/'>Shop</Link> <hr /></li>
                 <li><Link to='/casual'>Casual</Link></li>
-                <li><Link to='/womens'>Women</Link></li>
+                <li><Link to='/sports'>Sports</Link></li>
                 <li><Link to='/kids'>Kids</Link></li>
             </ul>
             <div className='nav-login-cart'>
                 <button onClick={handleBtnClick}>{isAuth || userId ? "Log Out" : "Log In"}</button>
                 {/* if the user is authenticated and his / her user id exists then render this */}
                 {
-                    !isAdminRoute && isAuth && (
+                    !isAdminRoute || !isHomePage && isAuth && (
                         <Link to={`/loginpage/${userDetails.id}/profile`}> <h2>View Orders</h2></Link>
                     )
                 }
