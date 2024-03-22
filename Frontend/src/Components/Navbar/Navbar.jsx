@@ -11,8 +11,6 @@ const Navbar = () => {
     // check whether current route is for admin or user
     const isAdminRoute = location.includes('admin');
 
-    console.log(isAdminRoute)
-
 
     const { isAuth, handleUserAuth, userDetails, setUserDetails, userId, setUserId } = useContext(UserAuthContext);
 
