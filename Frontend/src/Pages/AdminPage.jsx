@@ -1,27 +1,24 @@
 
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react"
 
 import './CSS/AdminPage.css'
-import { Link, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
+import AdminPageSidebar from "../Components/AdminPageSidebar";
+import { UserAuthContext } from "../Context/UserAuthContext";
 
 const AdminPage = () => {
 
     const { userId } = useParams();
-
+    const { setUserId } = useContext(UserAuthContext);
+    useEffect(() => {
+        setUserId(userId);
+    }, []);
 
 
     return (
         <div>
             <div className='profile-container'>
-                <div className="sidebar">
-                    {/* Your sidebar content */}
-                    <h2>Admin Panel</h2>
-                    <Link to={`/adminloginpage/${userId}/adminuserorders`}><button>Manage User Orders</button></Link>
-                    <button>Manage Bikes</button>
-                    <button>View Reports</button>
-                    <button>Log Out</button>
-                    {/* Add any other sidebar content here */}
-                </div>
+                <AdminPageSidebar userId={userId} />
                 <div className="main-content">
                     <div className="right-admin-section">
                         <h2>Summary</h2>

@@ -1,50 +1,18 @@
-import { useEffect, useState } from 'react'
-import './CSS/AdminUserOrdersPage.css'
-import AdminPageSidebar from '../Components/AdminPageSidebar';
-import { useParams } from 'react-router-dom';
+import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import AdminPageSidebar from "../Components/AdminPageSidebar";
+import { UserAuthContext } from "../Context/UserAuthContext";
 
 
-const AdminUserOrdersPage = () => {
-
+const AdminManageBikes = () => {
     const { userId } = useParams();
-
-    const [userOrders, setUserOrders] = useState([])
-    const fetchUserOrders = async () => {
-        try {
-            const response = await fetch('http://localhost:3000/orders'); // Assuming your API endpoint for fetching orders is '/orders'
-            if (!response.ok) {
-                throw new Error('Failed to fetch user orders');
-            }
-            const data = await response.json();
-
-            setUserOrders(data);
-        } catch (error) {
-            console.error('Error fetching user orders:', error);
-            // Handle error, show a message, etc.
-        }
-    };
-
+    const { setUserId } = useContext(UserAuthContext);
 
     useEffect(() => {
-
-        fetchUserOrders();
+        setUserId(userId);
     }, []);
 
-    const handleProcessOrder = async (orderId) => {
-        try {
-            const response = await fetch(`http://localhost:3000/orders/${orderId}/complete`, {
-                method: 'PUT',
-            });
-            if (!response.ok) {
-                throw new Error('Failed to process order');
-            }
-            // Refresh user orders after processing
-            fetchUserOrders();
-        } catch (error) {
-            console.error('Error processing order:', error);
-            // Handle error, show a message, etc.
-        }
-    };
+    const [bikes, setBikes] = useState([]);
 
 
     return (
@@ -72,7 +40,7 @@ const AdminUserOrdersPage = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {userOrders.map(order => (
+                                {bikes.map(order => (
                                     <tr key={order.order_id}>
                                         <td>{order.order_id}</td>
                                         <td>{order.name}</td>
@@ -86,7 +54,7 @@ const AdminUserOrdersPage = () => {
                                         {order.status === 'Pending' &&
                                             <td>
                                                 <div className="button-container">
-                                                    <button onClick={() => handleProcessOrder(order.order_id)} className='button'>Process Order</button>
+                                                    <button className='button'>Process Order</button>
                                                     <button className='button'>Cancel Order</button>
                                                 </div>
                                             </td>
@@ -102,4 +70,4 @@ const AdminUserOrdersPage = () => {
     )
 }
 
-export default AdminUserOrdersPage
+export default AdminManageBikes
