@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Navbar from './Components/Navbar/Navbar'
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Shop from './Pages/Shop'
 import ShopCategory from './Pages/ShopCategory'
 import Product from './Pages/Product'
@@ -22,6 +22,7 @@ import AdminUserOrdersPage from './Pages/AdminUserOrdersPage'
 import AdminManageBikes from './Pages/AdminManageBikes'
 import AdminEditBikeInfo from './Pages/AdminEditBikeInfo'
 import AdminUpdateStock from './Pages/AdminUpdateStock'
+import AdminReports from './Pages/AdminReports'
 
 
 const App = () => {
@@ -62,6 +63,8 @@ const App = () => {
             <Route path='/adminloginpage/:userId/adminmanagebikes' element={<AdminManageBikes />} />
             <Route path='/adminloginpage/:userId/adminmanagebikes/admineditbikeinfo/:productId' element={<AdminEditBikeInfo />} />
             <Route path='/adminloginpage/:userId/adminmanagebikes/adminupdatestock/:productId' element={<AdminUpdateStock />} />
+            {/* Reports routes */}
+            <Route path='/adminloginpage/:userId/adminreports' element={<AdminReports />} />
             {/* Alternative login / signup pages */}
             <Route path='/order-login-page' element={<OrderLoginPage />} />
             <Route path='/order-signup-page' element={<OrderSignupPage />} />

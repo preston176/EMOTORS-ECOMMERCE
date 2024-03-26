@@ -321,6 +321,33 @@ app.post('/login', (req, res) => {
     });
 });
 
+//route to get all user details from the database
+app.get('/users', (req, res) => {
+
+    // Execute SQL query to select all users from the Users table
+
+    connection.query('SELECT * FROM Users', (err, results) => {
+
+        if (err) {
+            console.error('Error fetching data:', err.stack);
+            res.status(500).json({ error: 'Internal server error' });
+            return;
+        }
+
+        // If no users found
+        if (results.length === 0) {
+            res.status(404).json({ error: 'No users found' });
+            return;
+        }
+
+        // Users found, send back the user data
+        res.status(200).json(results);
+
+    });
+
+});
+
+
 //endpoint to handle order processing
 // Endpoint to process orders
 app.post('/process_order', (req, res) => {
