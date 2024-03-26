@@ -295,7 +295,7 @@ app.post('/order-confirmation', (req, res) => {
 
 // Endpoint for user login
 app.post('/login', (req, res) => {
-    const { email, password, role } = req.body;
+    const { email, password, role, status } = req.body;
 
     // Check if any field is missing
     if (!email || !password) {
@@ -303,7 +303,7 @@ app.post('/login', (req, res) => {
     }
 
     // Check if the user exists in the database and the provided credentials match
-    connection.query('SELECT * FROM Users WHERE email = ? AND password = ? AND role = ?', [email, password, role], (err, results) => {
+    connection.query('SELECT * FROM Users WHERE email = ? AND password = ? AND role = ? AND status = ?', [email, password, role, status], (err, results) => {
         if (err) {
             console.error('Error executing login query:', err.stack);
             res.status(500).json({ error: 'Internal server error' });

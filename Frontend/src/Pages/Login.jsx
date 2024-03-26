@@ -31,7 +31,8 @@ const Login = () => {
         const userData = {
             email: email,
             password: password,
-            role: "user"
+            role: "user",
+            status: "active"
         };
 
         try {
