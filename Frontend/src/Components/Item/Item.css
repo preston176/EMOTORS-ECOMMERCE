@@ -1,34 +1,76 @@
 .item {
   width: 350px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.15s;
 }
+
+.item a {
+  text-decoration: none;
+}
+
 .item img {
   width: 100%;
-  height: 300px;
-  border-radius: 1rem;
+  height: 250px;
+  object-fit: cover; /* Ensure the image covers the entire container */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  transition: transform 0.3s ease; /* Add smooth transition on hover */
 }
 
 .item p {
-  margin: 6px 0px;
+  margin: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+.item p > span {
+  color: black;
+  font-weight: 900;
+}
+
+.item button {
+  background-color: #fa6400;
+  border: none;
+  display: flex;
+  width: 100%;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  place-content: center;
+  text-decoration: none;
+  font-size: 22px; /* Font size */
+  border-radius: 6px; /* Rounded corners */
+  cursor: pointer; /* Add cursor pointer */
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.item button:hover {
+  background-color: #ca5101; 
 }
 
 .item-prices {
   display: flex;
-  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
 }
 
 .item-price-new {
   color: #374151;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
 }
+
 .item-price-old {
   color: #8c8c8c;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   text-decoration: line-through;
 }
 
 .item:hover {
-  transform: scale(1.05);
-  transition: 0.6s;
+  transform: scale(1.05); /* Scale up the image on hover */
 }
