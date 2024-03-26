@@ -1,0 +1,13 @@
+.sidebar a {
+  text-decoration: none;
+}
+.sidebar button {
+  display: flex;
+  width: 100%;
+  cursor: pointer;
+}
+
+.sidebar button:hover {
+  background-color: #a0490a;
+  transform: scale(1.1) !important;
+}

@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react"
 
 import './CSS/AdminPage.css'
 import { useParams } from "react-router-dom"
-import AdminPageSidebar from "../Components/AdminPageSidebar";
+import AdminPageSidebar from "./AdminPageSidebar";
 import { UserAuthContext } from "../Context/UserAuthContext";
 
 const AdminPage = () => {

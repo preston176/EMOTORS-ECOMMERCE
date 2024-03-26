@@ -1,79 +1,68 @@
+/* Navbar.css */
 .navbar {
   display: flex;
   justify-content: space-around;
-  padding: 16px;
-  box-shadow: 0 1px 3px -2px black;
+  align-items: center;
+  padding: 12px 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .navbar a {
   text-decoration: none;
+  color: #626262;
+  transition: color 0.3s;
 }
 
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.navbar a:hover {
+  color: #ff4141;
 }
 
-.nav-logo p {
-  color: #171717;
-  font-size: 38px;
-  font-weight: 600px;
+.nav-logo img {
+  width: 100px; /* Adjust size as needed */
 }
 
 .nav-menu {
   display: flex;
-  gap: 50px;
-  align-items: center;
+  gap: 30px;
   list-style: none;
-  color: #626262;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-menu li {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.nav-menu hr {
-  border: none;
-  width: 80%;
-  height: 3px;
-  border-radius: 10px;
-  background: #ff4141;
-}
-
-.nav-login-cart {
-  display: flex;
-  align-items: center;
-  gap: 45px;
+  font-size: 18px;
 }
 
 .nav-login-cart button {
-  width: 157px;
-  height: 58px;
+  width: 120px;
+  height: 40px;
   outline: none;
-  border: 1px solid #7a7a7a;
-  border-radius: 75px;
-  color: #515151;
-  font-size: 20px;
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 16px;
   font-weight: 500;
-  background: white;
+  background-color: #fa6400;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.nav-cart-count {
-  width: 22px;
-  height: 22px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: -35px;
-  margin-left: -55px;
-  border-radius: 11px;
-  font-size: 14px;
-  background: red;
-  color: white;
+.nav-login-cart button:hover {
+  background-color: #e03030;
+}
+
+.nav-login-cart h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.nav-login-cart a {
+  text-decoration: none;
+  color: #626262;
+  transition: color 0.3s;
+}
+
+.nav-login-cart a:hover {
+  color: #ff4141;
 }

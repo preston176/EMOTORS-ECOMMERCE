@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './CSS/AdminUserOrdersPage.css'
-import AdminPageSidebar from '../Components/AdminPageSidebar';
+import AdminPageSidebar from './AdminPageSidebar';
 import { useParams } from 'react-router-dom';
 
 
@@ -81,7 +81,7 @@ const AdminUserOrdersPage = () => {
                                         <td>{order.quantity}</td>
                                         <td>{order.price_per_unit}</td>
                                         <td>{order.quantity * order.price_per_unit}</td>
-                                        <td>{new Date(order.order_date).toLocaleDateString()}</td>
+                                        <td>{`${new Date(order.order_date).toLocaleDateString().split('/').join('/')}`}</td>
                                         <td>{order.status}</td>
                                         {order.status === 'Pending' &&
                                             <td>

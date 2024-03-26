@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import AdminPageSidebar from "../Components/AdminPageSidebar";
+import AdminPageSidebar from "./AdminPageSidebar";
 import { UserAuthContext } from "../Context/UserAuthContext";
 import './CSS/AdminManageBikes.css'
 import './CSS/AdminEditBikeInfo.css'
