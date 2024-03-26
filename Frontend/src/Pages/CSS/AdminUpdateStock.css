@@ -1,0 +1,19 @@
+.increase-stock {
+  width: fit-content !important;
+  height: fit-content !important;
+  text-align: center;
+  align-items: center;
+}
+
+.decrease-stock {
+  width: fit-content !important;
+  height: fit-content !important;
+  text-align: center;
+  align-items: center;
+}
+
+.enter-stock-input-field {
+  width: 120px !important;
+  height: 50px;
+  margin: 10px;
+}

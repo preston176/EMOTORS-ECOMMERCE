@@ -1,3 +1,45 @@
 .admin-bike-image {
   width: 200px;
 }
+.edit-btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.edit-btn:hover {
+  background-color: #45a049;
+}
+.update-btn {
+  background-color: rgb(255, 255, 0);
+  color: black;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.update-btn:hover {
+  background-color: yellowgreen;
+}
+
+.right-admin-section-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.right-admin-section-container button {
+  width: 10%;
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.right-admin-section-container button:hover {
+  background-color: #45a049;
+}

@@ -117,7 +117,31 @@ app.get('/products/:id', (req, res) => {
     });
 });
 
-// route to update product details based on product id
+// route to delete a product from the database (it changes its status from active to deleted)
+// Endpoint to change the status of a product from active to deleted
+app.put('/products/:id/delete', (req, res) => {
+    const productId = req.params.id;
+
+    // Execute SQL query to update the status of the product to 'deleted'
+    connection.query('UPDATE Products SET status = "deleted" WHERE id = ?', productId, (err, results) => {
+        if (err) {
+            console.error('Error updating product status:', err.stack);
+            res.status(500).json({ error: 'Internal server error' });
+            return;
+        }
+
+        // Check if the product with the specified ID was found and updated
+        if (results.affectedRows === 0) {
+            res.status(404).json({ error: 'Product not found' });
+            return;
+        }
+
+        // Product status updated successfully
+        res.json({ message: 'Product status changed to deleted' });
+    });
+});
+
+
 
 // route to update product details based on product id
 app.put('/products/:id', upload.single('image'), (req, res) => {
@@ -128,7 +152,7 @@ app.put('/products/:id', upload.single('image'), (req, res) => {
     // Check if no image file is uploaded
     if (!imageFile) {
 
-        // Remove the image_url field from the updatedProduct object to ensure it's not modified
+        // Remove the image_url field from the updatedProduct object to ensure it's not modifi
         delete updatedProduct.image_url
         // Execute SQL query to update the product data without modifying the image_url field
         connection.query('UPDATE products SET ? WHERE id = ?', [updatedProduct, productId], (err, results) => {

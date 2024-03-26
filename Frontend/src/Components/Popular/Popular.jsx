@@ -17,8 +17,9 @@ const Popular = () => {
             })
             .then(response => response.json())
             .then(data => {
-                setBikes(data);
-                console.log(data)
+                const activeBikes = data.filter(bike => bike.status === 'active');
+                setBikes(activeBikes);
+                // console.log(data)
             })
             .catch(error => {
                 console.error('Error:', error);

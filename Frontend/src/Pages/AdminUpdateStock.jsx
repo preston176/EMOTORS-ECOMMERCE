@@ -4,9 +4,10 @@ import AdminPageSidebar from "../Components/AdminPageSidebar";
 import { UserAuthContext } from "../Context/UserAuthContext";
 import './CSS/AdminManageBikes.css'
 import './CSS/AdminEditBikeInfo.css'
+import './CSS/AdminUpdateStock.css'
 import { toast, ToastContainer } from "react-toastify";
 
-const AdminEditBikeInfo = () => {
+const AdminUpdateStock = () => {
     const { userId } = useParams();
     const { productId } = useParams();
     const { setUserId } = useContext(UserAuthContext);
@@ -65,11 +66,11 @@ const AdminEditBikeInfo = () => {
             .then(response => response.json())
             .then(data => {
                 // console.log(data); // Handle success or error
-                toast.success('Product data updated successfully', data);
+                toast.success('Quantity / Stock updated successfully', data);
             })
             .catch(error => {
                 // console.error('Error updating product data:', error);
-                toast.error('Error updating product data:', error);
+                toast.error('Error updating Stock / Quantity:', error);
             });
     };
 
@@ -80,7 +81,7 @@ const AdminEditBikeInfo = () => {
                 <AdminPageSidebar userId={userId} />
                 <div className="main-content">
                     <div className="right-admin-section">
-                        <h2>Edit Bike Info</h2>
+                        <h2>Update Bike Stock</h2>
                         <form className="admin-bikes-form" onSubmit={handleSubmit} encType="multipart/form-data">
                             <label >
                                 <span>Name:</span>
@@ -88,16 +89,16 @@ const AdminEditBikeInfo = () => {
                                     type="text"
                                     id="name"
                                     value={selectedBike.name}
-                                    onChange={(e) => setSelectedBike(prevState => ({
-                                        ...prevState,
-                                        name: e.target.value
-                                    }))}
+                                    disabled
+
                                 />
                             </label>
 
                             <label htmlFor="quantity">
                                 <span>Quantity (in Stock):</span>
+                                <button type="button" className="decrease-stock" onClick={() => setSelectedBike(prevState => ({ ...prevState, quantity: Math.max(prevState.quantity - 1, 0) }))}>-</button>
                                 <input
+                                    className="enter-stock-input-field"
                                     type="number"
                                     id="quantity"
                                     value={selectedBike.quantity}
@@ -105,47 +106,38 @@ const AdminEditBikeInfo = () => {
                                         if (e.target.value < 0) {
                                             return;
                                         }
-
                                         setSelectedBike(prevState => ({
                                             ...prevState,
                                             quantity: e.target.value
                                         }))
-                                    }
-                                    }
+                                    }}
                                 />
+                                <button type="button" className="increase-stock" onClick={() => setSelectedBike(prevState => ({ ...prevState, quantity: prevState.quantity + 1 }))}>+</button>
+
                             </label>
 
                             <label htmlFor="description">
                                 <span>Description:</span>
-                                <textarea name="description" value={selectedBike.description} onChange={(e) => setSelectedBike(prevState => ({
-                                    ...prevState,
-                                    description: e.target.value
-                                }))}></textarea>
+                                <textarea name="description" value={selectedBike.description}
+                                    disabled
+                                ></textarea>
                             </label>
 
                             <label htmlFor="price">
                                 <span>Price:</span>
-                                <input type="number" name="price" value={selectedBike.price} placeholder="Enter the price" />
+                                <input type="number" name="price" value={selectedBike.price} placeholder="Enter the price" disabled />
                             </label>
 
                             <label htmlFor="category">
                                 <span>Category:</span>
-                                <select id="category" name="category" value={selectedBike.category} onChange={(e) => setSelectedBike(prevState => ({
-                                    ...prevState,
-                                    category: e.target.value
-                                }))}>
-                                    <option value="casual">Casual</option>
-                                    <option value="sports">Sports</option>
-                                    <option value="kids">Kids</option>
-                                </select>
+                                <input id="category" name="category" value={selectedBike.category}
+
+                                    disabled
+                                >
+                                </input>
                             </label>
 
-                            <label htmlFor="image">
-                                <span>Select Image:</span>
-                                <input type="file" id="image" name="image" accept="image/*" onChange={handleImageUpload} />
-                            </label>
-
-                            <img src={`http://localhost:3000/images/${selectedBike.image_url}`} alt="Bike1" />
+                            <img src={`http://localhost:3000/images/${selectedBike.image_url}`} alt={`${selectedBike.name}`} />
 
                             <button onClick={handleSubmit}>Update Info</button>
                         </form>
@@ -157,4 +149,4 @@ const AdminEditBikeInfo = () => {
     )
 }
 
-export default AdminEditBikeInfo
+export default AdminUpdateStock

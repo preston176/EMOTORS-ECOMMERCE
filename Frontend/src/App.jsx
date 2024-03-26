@@ -21,6 +21,7 @@ import AdminLoginPage from './Pages/AdminLoginPage'
 import AdminUserOrdersPage from './Pages/AdminUserOrdersPage'
 import AdminManageBikes from './Pages/AdminManageBikes'
 import AdminEditBikeInfo from './Pages/AdminEditBikeInfo'
+import AdminUpdateStock from './Pages/AdminUpdateStock'
 
 
 const App = () => {
@@ -60,6 +61,7 @@ const App = () => {
             <Route path='/adminloginpage/:userId/adminuserorders' element={<AdminUserOrdersPage />} />
             <Route path='/adminloginpage/:userId/adminmanagebikes' element={<AdminManageBikes />} />
             <Route path='/adminloginpage/:userId/adminmanagebikes/admineditbikeinfo/:productId' element={<AdminEditBikeInfo />} />
+            <Route path='/adminloginpage/:userId/adminmanagebikes/adminupdatestock/:productId' element={<AdminUpdateStock />} />
             {/* Alternative login / signup pages */}
             <Route path='/order-login-page' element={<OrderLoginPage />} />
             <Route path='/order-signup-page' element={<OrderSignupPage />} />
