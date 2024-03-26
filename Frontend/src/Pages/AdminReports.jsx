@@ -13,7 +13,7 @@ const AdminReports = () => {
     const [userFilter, setUserFilter] = useState('all');
     const [activeButton, setActiveButton] = useState('users');
     const [filteredOrders, setFilteredOrders] = useState([]);
-    const [orderFilter, setOrderFilter] = useState('all')
+    const [orderFilter, setOrderFilter] = useState('completed')
     const [bikes, setBikes] = useState([]);
     const [bikeFilter, setBikeFilter] = useState('all');
     const [filteredBikes, setFilteredBikes] = useState([]);
@@ -59,10 +59,10 @@ const AdminReports = () => {
         if (criteria === 'all') {
             setFilteredOrders(orders);
         } else if (criteria === 'pending') {
-            const pendingOrders = orders.filter(order => order.status === "In-Stock");
+            const pendingOrders = orders.filter(order => order.status === "pending");
             setFilteredOrders(pendingOrders);
         } else {
-            const completedOrders = orders.filter(order => order.status === "deleted");
+            const completedOrders = orders.filter(order => order.status === "completed");
             setFilteredOrders(completedOrders);
         }
     };
@@ -100,6 +100,21 @@ const AdminReports = () => {
             setFilteredBikes(deletedBikes);
         }
     }
+
+    const ordersByBike = {};
+    filteredOrders.forEach(order => {
+        if (!ordersByBike[order.name]) {
+            ordersByBike[order.name] = [];
+        }
+        ordersByBike[order.name].push(order);
+    });
+
+    // Then, calculate subtotals for each bike
+    const bikeSubtotals = Object.entries(ordersByBike).map(([bikeName, orders]) => {
+        const totalQuantity = orders.reduce((acc, curr) => acc + curr.quantity, 0);
+        const totalPrice = orders.reduce((acc, curr) => acc + curr.quantity * curr.price_per_unit, 0);
+        return { bikeName, totalQuantity, totalPrice };
+    });
 
 
     // function to print the report
@@ -254,7 +269,16 @@ const AdminReports = () => {
                                                 </tbody>
                                             </table>
                                         }
-                                        Total orders: {filteredOrders.length}
+                                        <div>
+                                            <h3>Subtotals By Bike:</h3>
+                                            {bikeSubtotals.map(({ bikeName, totalQuantity, totalPrice }) => (
+                                                <div key={bikeName} className="subtotals">
+                                                    <h3>{bikeName}</h3>
+                                                    <p>Total Quantity: {totalQuantity}</p>
+                                                    <p>Total Price: {totalPrice} KES</p>
+                                                </div>
+                                            ))}
+                                        </div>
                                     </>
                                 )
                             }
@@ -272,7 +296,7 @@ const AdminReports = () => {
                                             </div>
                                             <button onClick={handlePrint}>Print Report</button>
                                         </div>
-                                        <h2 className="title">Bikes {bikeFilter}</h2>
+                                        <h2 className="title">{bikeFilter} Bikes</h2>
                                         {
                                             filteredBikes.length === 0 ? <p>No bikes available</p> :
                                                 (<>
@@ -305,7 +329,7 @@ const AdminReports = () => {
                                                             ))}
                                                         </tbody>
                                                     </table>
-                                                    <div>Total number of Bikes: {bikes.length}</div>
+                                                    <div>Total number of Bikes: {filteredBikes.length}</div>
                                                 </>)
                                         }
                                     </>
