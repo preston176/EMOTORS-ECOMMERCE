@@ -1,0 +1,54 @@
+.admin-bikes-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px; /* Adjust this value as needed */
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.admin-bikes-form label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.admin-bikes-form label > span {
+  margin-right: 10px;
+  width: 150px; /* Adjust this value as needed */
+}
+
+.admin-bikes-form input[type="text"],
+.admin-bikes-form input[type="number"],
+.admin-bikes-form textarea,
+.admin-bikes-form select,
+.admin-bikes-form button,
+.admin-bikes-form input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.admin-bikes-form img {
+  max-width: 40%;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.admin-bikes-form button {
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.admin-bikes-form button:hover {
+  background-color: #45a049;
+}

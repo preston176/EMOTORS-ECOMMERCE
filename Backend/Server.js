@@ -2,13 +2,17 @@ const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const axios = require('axios');
-const cors = require('cors'); // Import the cors middleware
+const cors = require('cors');
+const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const port = 3000;
 
 // Middleware to parse JSON bodies
+const upload = multer({ dest: path.resolve(__dirname, 'images/') });
+
 app.use(bodyParser.json());
 app.use(cors()); // Enable CORS for all routes
 app.use('/images', express.static(path.join(__dirname, 'images')));
@@ -29,6 +33,41 @@ connection.connect((err) => {
     }
     console.log('Connected to MySQL database');
 });
+
+
+// functions
+
+
+
+// Function to save and rename image file
+function saveAndRenameImage(imageFile, bikeName) {
+    return new Promise((resolve, reject) => {
+        // Generate new filename based on bike name
+        const fileName = `${bikeName.replace(/\s+/g, '-').toLowerCase()}.jpg`;
+        const filePath = path.join(__dirname, 'images', fileName);
+
+        // Read the uploaded image file
+        fs.readFile(imageFile.path, (err, data) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+
+            // Save the file with the new name
+            fs.writeFile(filePath, data, (err) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                resolve(fileName);
+            });
+        });
+    });
+}
+
+
+// end of functions
+
 
 // Define a route to fetch all products
 app.get('/products', (req, res) => {
@@ -78,6 +117,66 @@ app.get('/products/:id', (req, res) => {
     });
 });
 
+// route to update product details based on product id
+
+// route to update product details based on product id
+app.put('/products/:id', upload.single('image'), (req, res) => {
+    const imageFile = req.file;
+    const productId = req.params.id;
+    const updatedProduct = req.body;
+
+    // Check if no image file is uploaded
+    if (!imageFile) {
+
+        // Remove the image_url field from the updatedProduct object to ensure it's not modified
+        delete updatedProduct.image_url
+        // Execute SQL query to update the product data without modifying the image_url field
+        connection.query('UPDATE products SET ? WHERE id = ?', [updatedProduct, productId], (err, results) => {
+            if (err) {
+                console.error('Error updating product data:', err.stack);
+                res.status(500).json({ error: 'Internal server error' });
+                return;
+            }
+
+            if (results.affectedRows === 0) {
+                res.status(404).json({ error: 'Product not found' });
+                return;
+            }
+
+            res.json({ message: 'Product details updated successfully' }); // Send a success message as a JSON response
+        });
+    } else {
+        // Save and rename image file
+        saveAndRenameImage(imageFile, updatedProduct.name)
+            .then((fileName) => {
+                // Update the product data with the new image URL
+                updatedProduct.image_url = fileName;
+                const fileExtension = path.extname(imageFile.originalname);
+
+                // Append the file extension to the image URL
+                updatedProduct.image_url = fileName + fileExtension;
+                // Execute SQL query to update the product data in the database
+                connection.query('UPDATE products SET ? WHERE id = ?', [updatedProduct, productId], (err, results) => {
+                    if (err) {
+                        console.error('Error updating product data:', err.stack);
+                        res.status(500).json({ error: 'Internal server error' });
+                        return;
+                    }
+
+                    if (results.affectedRows === 0) {
+                        res.status(404).json({ error: 'Product not found' });
+                        return;
+                    }
+
+                    res.json({ message: 'Product updated successfully' }); // Send a success message as a JSON response
+                });
+            })
+            .catch((err) => {
+                console.error('Error saving and renaming image:', err);
+                res.status(500).json({ error: 'Internal server error' });
+            });
+    }
+});
 
 // route to fetch images
 app.get('/images/:productId', (req, res) => {
