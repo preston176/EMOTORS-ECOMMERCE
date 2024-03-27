@@ -16,6 +16,7 @@ const Navbar = () => {
             handleUserAuth();
             setUserId(undefined);
             navigate('/');
+            window.reload();
         } else {
             setUserDetails(null);
             navigate('/loginpage');
