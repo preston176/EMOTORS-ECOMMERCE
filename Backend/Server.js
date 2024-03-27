@@ -347,6 +347,56 @@ app.get('/users', (req, res) => {
 
 });
 
+// route to fetch user details based on user id
+
+app.get('/users/:userId', (req, res) => {
+    const userId = req.params.userId;
+
+    // Execute SQL query to select user data by user ID from the Users table
+    connection.query('SELECT * FROM Users WHERE id = ?', userId, (err, results) => {
+        if (err) {
+            console.error('Error fetching data:', err.stack);
+            res.status(500).json({ error: 'Internal server error' });
+            return;
+        }
+
+        // If no user found
+        if (results.length === 0) {
+            res.status(404).json({ error: 'User not found' });
+            return;
+        }
+
+        // User found, send back the user data
+        res.status(200).json(results[0]); // Assuming user ID is unique, so only one result expected
+    });
+});
+
+// route to handle user details update
+app.put('/users/:userId', (req, res) => {
+    const userId = req.params.userId;
+    const userData = req.body;
+
+    // Execute SQL query to update user data in the Users table
+    connection.query('UPDATE Users SET ? WHERE id = ?', [userData, userId], (err, results) => {
+        if (err) {
+            console.error('Error updating data:', err.stack);
+            res.status(500).json({ error: 'Internal server error' });
+            return;
+        }
+
+        // Check if any rows were affected by the update operation
+        if (results.affectedRows === 0) {
+            // No user found with the provided user ID
+            res.status(404).json({ error: 'User not found' });
+            return;
+        }
+
+        // User data updated successfully
+        res.status(200).json({ message: 'User data updated successfully' });
+    });
+});
+
+
 
 //endpoint to handle order processing
 // Endpoint to process orders

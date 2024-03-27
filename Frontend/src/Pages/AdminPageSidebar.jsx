@@ -1,8 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './CSS/AdminPageSidebar.css'
 
 const AdminPageSidebar = ({ userId }) => {
+
+    const navigate = useNavigate();
 
     return (
         <div className="sidebar">
@@ -12,7 +14,7 @@ const AdminPageSidebar = ({ userId }) => {
             <Link to={`/adminloginpage/${userId}/adminuserorders`}><button>Manage User Orders</button></Link>
             <Link to={`/adminloginpage/${userId}/adminmanagebikes`}> <button>Manage Bikes</button></Link>
             <Link to={`/adminloginpage/${userId}/adminreports`}><button>View Reports</button></Link>
-            <button>Log Out</button>
+            <button onClick={() => { navigate('/'); window.default(); }}>Log Out</button>
             {/* Add any other sidebar content here */}
         </div>
     )
