@@ -169,7 +169,7 @@ const ConfirmOrder = () => {
                     </tbody>
                 </table>
                 <h3>Total: {selectedBike.price}</h3>
-                <button className='proceed-btn' onClick={handleProceed}>Proceed</button>
+                <button className='proceed-btn' onClick={handleProceed} >Proceed</button>
 
                 {
                     showPaymentForm && (
@@ -234,7 +234,7 @@ const ConfirmOrder = () => {
 
 
 
-                                            <button type="submit" className='proceed-btn' onClick={handlePayment}>Pay Now</button>
+                                            <button type="submit" className='proceed-btn' onClick={handlePayment} disabled>Mobile Payment (Currently unavailable)</button>
                                         </form>
                                     </div>
                                 </div>

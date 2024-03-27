@@ -38,15 +38,22 @@ tbody tr:hover {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
+  cursor: not-allowed;
   transition: background-color 0.3s, transform 0.3s;
   margin-top: 20px;
 }
+
 .proceed-btn:hover {
-  background-color: #ff7b00;
-  transform: scale(1.05);
+  background-color: #595857;
+  color: #595857;
 }
 
+.gpay-card-info-container.black,
+.gpay-card-info-animation-container.black {
+  background-color: #000;
+  box-shadow: none;
+  width: 100%;
+}
 .backdrop {
   position: fixed;
   top: 0;
