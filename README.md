@@ -14,10 +14,8 @@
 
 ## Features
 1. User can login and register
-2. User can view all products and make purchase via card payment
-3. user can view purchased products
-<!-- 4. To-do -->
-5. Admin can add, update and delete products
-6. Admin can view all users and their purchases
-7. Admin can generate reports
-<!-- 8. End of to do -->
+2. User can view all products and make purchase via **card** **payment**
+3. user can view **purchased** **products** 
+5. Admin can **add**, **update** and **delete** products
+6. Admin can **view all users** and their purchases
+6. Admin can **generate reports**
