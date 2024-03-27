@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2024 at 07:15 PM
+-- Generation Time: Mar 27, 2024 at 08:33 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -46,6 +46,16 @@ CREATE TABLE `orders` (
   `total_amount` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `order_date`, `total_amount`) VALUES
+(1, 10, '2024-03-11 18:30:05', 100.00),
+(2, 11, '2024-03-14 11:31:45', 100.00),
+(4, 12, '2024-03-14 13:27:55', 100.00),
+(5, 2, '2024-03-22 13:23:18', 100.00);
+
 -- --------------------------------------------------------
 
 --
@@ -57,8 +67,19 @@ CREATE TABLE `order_items` (
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `price_per_unit` decimal(10,2) NOT NULL
+  `price_per_unit` decimal(10,2) NOT NULL,
+  `status` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price_per_unit`, `status`) VALUES
+(1, 1, 2, 1, 100.00, 'completed'),
+(2, 2, 2, 1, 100.00, 'completed'),
+(3, 4, 2, 1, 100.00, 'completed'),
+(4, 5, 2, 1, 100.00, 'completed');
 
 -- --------------------------------------------------------
 
@@ -74,15 +95,16 @@ CREATE TABLE `products` (
   `price` decimal(10,2) NOT NULL,
   `category` varchar(100) DEFAULT NULL,
   `image_url` varchar(255) NOT NULL,
-  `date_added` date NOT NULL DEFAULT current_timestamp()
+  `date_added` date NOT NULL DEFAULT current_timestamp(),
+  `status` enum('active','deleted') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `quantity`, `description`, `price`, `category`, `image_url`, `date_added`) VALUES
-(2, 'Bike1', 5, 'this is the bike ehe', 100.00, 'Casual', 'bike1.jpg', '2024-02-16');
+INSERT INTO `products` (`id`, `name`, `quantity`, `description`, `price`, `category`, `image_url`, `date_added`, `status`) VALUES
+(2, 'Bike1', 2, 'this is the bike ehe', 100.00, 'Casual', 'Bike1.JPG', '2024-02-16', 'active');
 
 -- --------------------------------------------------------
 
@@ -110,20 +132,24 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `role` enum('admin','user') NOT NULL,
   `registration_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `phone` int(12) NOT NULL
+  `phone` int(12) NOT NULL,
+  `status` enum('active','deleted') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `registration_date`, `phone`) VALUES
-(1, 'pres', 'zaccox@gmail.com', 'shah7860', 'user', '2024-02-13 08:16:26', 0),
-(2, 'collo', 'collo@gmail.com', 'sh', 'user', '2024-02-13 08:22:15', 0),
-(6, 'collo1', 'collo1@gmail.com', '1234', 'user', '2024-02-13 08:23:18', 0),
-(7, 'adewat', 'adewat@gmail.com', '1234', 'user', '2024-02-16 08:48:38', 799078848),
-(8, 'john', 'wakenya@gmail.com', '1234', 'user', '2024-02-19 11:59:31', 733182526),
-(10, 'user1', 'user1@gmail.com', 'admin123', 'user', '2024-03-11 16:53:28', 799078850);
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `registration_date`, `phone`, `status`) VALUES
+(1, 'pres', 'zaccox@gmail.com', 'shah7860', 'user', '2024-02-13 08:16:26', 0, 'active'),
+(2, 'collo', 'collo@gmail.com', 'sh', 'user', '2024-02-13 08:22:15', 0, 'active'),
+(6, 'collo1', 'collo1@gmail.com', '1234', 'user', '2024-02-13 08:23:18', 0, 'active'),
+(7, 'adewat', 'adewat@gmail.com', '1234', 'user', '2024-02-16 08:48:38', 799078848, 'active'),
+(8, 'john', 'wakenya@gmail.com', '1234', 'user', '2024-02-19 11:59:31', 733182526, 'deleted'),
+(10, 'user1', 'user1@gmail.com', 'admin123', 'user', '2024-03-11 16:53:28', 799078850, 'active'),
+(11, 'kafugi', 'kafugi@gmail.com', '12345678', 'user', '2024-03-14 11:29:50', 711991854, 'active'),
+(12, 'testuser1', 'testuser1@gmail.com', '12345678', 'user', '2024-03-14 13:26:03', 711111111, 'active'),
+(13, 'admin1', 'admin1@gmail.com', '1234', 'admin', '2024-03-22 12:17:50', 711991854, 'active');
 
 --
 -- Indexes for dumped tables
@@ -185,13 +211,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -209,7 +235,7 @@ ALTER TABLE `reports`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables

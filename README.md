@@ -1,5 +1,7 @@
 ## Emotors- Ecommerce
 
+## NEW: Update the schema ⚠️⚠️
+
 ### Usage
 
 1. Git clone the whole repo
