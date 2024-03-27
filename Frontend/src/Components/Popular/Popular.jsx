@@ -36,7 +36,7 @@ const Popular = () => {
             <hr />
             <div className="popular-item">
                 {bikes.map((item) => (
-                    <Item key={crypto.randomUUID()}
+                    <Item key={item.id}
                         id={item.id}
                         name={item.name}
                         image={item.image}

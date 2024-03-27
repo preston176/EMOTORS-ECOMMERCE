@@ -29,8 +29,8 @@
   justify-content: space-evenly;
 }
 
-.right-admin-section-container button {
-  width: 10%;
+.right-admin-section-container > a button {
+  width: 100%;
   background-color: #4caf50;
   color: white;
   padding: 14px 20px;

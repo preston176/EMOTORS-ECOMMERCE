@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import AdminPageSidebar from "./AdminPageSidebar";
 import { UserAuthContext } from "../Context/UserAuthContext";
 import './CSS/AdminManageBikes.css'
@@ -58,7 +58,7 @@ const AdminManageBikes = () => {
                 <div className="main-content">
                     <div className="right-admin-section">
                         <div className="right-admin-section-container"> <h2>Bikes</h2>
-                            <button>Add New Bikes</button>
+                            <Link to={`/adminloginpage/${userId}/adminmanagebikes/adminaddbike`}> <button>Add New Bike</button></Link>
                         </div>
 
                         <table className="order-table">
@@ -83,7 +83,10 @@ const AdminManageBikes = () => {
                                         <td><img className="admin-bike-image" src={bike.image} /></td>
                                         <td>{bike.quantity}</td>
                                         <td>{bike.category}</td>
-                                        <td>{new Date(bike.date_added).toLocaleDateString()}</td>
+                                        <td>
+                                            {`${new Date(bike.date_added).getDate()}/${new Date(bike.date_added).getMonth() + 1}/${new Date(bike.date_added).getFullYear()}`}
+                                        </td>
+
                                         <td>{bike.price}</td>
                                         <td><div className="button-container">
                                             <button className='button edit-btn' onClick={() => navigate(`/adminloginpage/${userId}/AdminManageBikes/admineditbikeinfo/${bike.id}`)}>Edit Bike Info</button>

@@ -49,7 +49,9 @@ const OrderSignupPage = () => {
             username: name,
             email: email,
             password: password,
-            phone: phone
+            phone: phone,
+            status: "active",
+            role: "user"
         };
 
 

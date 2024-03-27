@@ -178,7 +178,7 @@ app.put('/products/:id', upload.single('image'), (req, res) => {
                 const fileExtension = path.extname(imageFile.originalname);
 
                 // Append the file extension to the image URL
-                updatedProduct.image_url = fileName + fileExtension;
+                updatedProduct.image_url = fileName;
                 // Execute SQL query to update the product data in the database
                 connection.query('UPDATE products SET ? WHERE id = ?', [updatedProduct, productId], (err, results) => {
                     if (err) {
@@ -201,6 +201,42 @@ app.put('/products/:id', upload.single('image'), (req, res) => {
             });
     }
 });
+
+//route to add new bike to the database
+
+app.post('/products', upload.single('image'), (req, res) => {
+    const imageFile = req.file;
+    const newProduct = req.body;
+
+    // Check if no image file is uploaded
+    if (!imageFile) {
+        res.status(400).json({ error: 'Image file is required' });
+        return;
+    }
+
+    // Save and rename image file
+    saveAndRenameImage(imageFile, newProduct.name)
+        .then((fileName) => {
+            // Set the image URL for the new product
+            newProduct.image_url = fileName ;
+
+            // Execute SQL query to insert the new product data into the database
+            connection.query('INSERT INTO products SET ?', newProduct, (err, results) => {
+                if (err) {
+                    console.error('Error inserting product data:', err.stack);
+                    res.status(500).json({ error: 'Internal server error' });
+                    return;
+                }
+
+                res.status(201).json({ message: 'Product added successfully', productId: results.insertId });
+            });
+        })
+        .catch((err) => {
+            console.error('Error saving and renaming image:', err);
+            res.status(500).json({ error: 'Internal server error' });
+        });
+});
+
 
 // route to fetch images
 app.get('/images/:productId', (req, res) => {
@@ -237,7 +273,7 @@ app.post('/signup', (req, res) => {
     }
 
     // Insert user into the database
-    connection.query('INSERT INTO Users (username, email, password, role, phone) VALUES (?, ?, ?, ?, ?)', [username, email, password, 'user', phone], (err, results) => {
+    connection.query('INSERT INTO Users (username, email, password, role, status, phone) VALUES (?, ?, ?, ?,?, ?)', [username, email, password, role, status, phone], (err, results) => {
         if (err) {
             console.error('Error creating user:', err.stack);
             res.status(500).json({ error: 'Internal server error' });

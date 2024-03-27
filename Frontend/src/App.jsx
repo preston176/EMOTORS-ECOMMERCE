@@ -23,6 +23,7 @@ import AdminManageBikes from './Pages/AdminManageBikes'
 import AdminEditBikeInfo from './Pages/AdminEditBikeInfo'
 import AdminUpdateStock from './Pages/AdminUpdateStock'
 import AdminReports from './Pages/AdminReports'
+import AdminAddBike from './Pages/AdminAddBike'
 
 
 const App = () => {
@@ -61,6 +62,7 @@ const App = () => {
             <Route path='/adminloginpage/:userId/admin' element={<AdminPage />} />
             <Route path='/adminloginpage/:userId/adminuserorders' element={<AdminUserOrdersPage />} />
             <Route path='/adminloginpage/:userId/adminmanagebikes' element={<AdminManageBikes />} />
+            <Route path='/adminloginpage/:userId/adminmanagebikes/adminaddbike' element={<AdminAddBike />} />
             <Route path='/adminloginpage/:userId/adminmanagebikes/admineditbikeinfo/:productId' element={<AdminEditBikeInfo />} />
             <Route path='/adminloginpage/:userId/adminmanagebikes/adminupdatestock/:productId' element={<AdminUpdateStock />} />
             {/* Reports routes */}

@@ -105,7 +105,7 @@ const UserProfile = () => {
                     <h2>Manage</h2>
                     <button onClick={() => setActiveButton('orders')}>View Personal Orders</button>
                     <button onClick={() => setActiveButton('change-personal-info')}>Change Personal Info</button>
-                    <button onClick={() => { navigate('/'); window.default(); }}>Log Out</button>
+                 
                     {/* Add any other sidebar content here */}
                 </div>
                 <div className="main-content">
@@ -120,17 +120,32 @@ const UserProfile = () => {
                                             <tr>
                                                 <th>Order ID</th>
                                                 <th>Order Date</th>
+                                                <th>Bikes Ordered</th>
+                                                <th>Price per unit</th>
+                                                <th>Date ordered</th>
                                                 <th>Status</th>
                                                 <th>Total</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {userOrders.map((order) => (
-                                                <tr key={order.id}>
-                                                    <td>{order.id}</td>
-                                                    <td>{order.order_date}</td>
+                                                <tr key={order.order_id}>
+                                                    <td>{order.order_id}</td>
+                                                    <td>{order.name}</td>
+                                                    <td>{order.quantity}</td>
+                                                    <td>KES {order.price_per_unit}</td>
+                                                    <td>
+                                                        {new Date(order.order_date).toLocaleString('en-GB', {
+                                                            day: 'numeric',
+                                                            month: 'numeric',
+                                                            year: 'numeric',
+                                                            hour: '2-digit',
+                                                            minute: '2-digit',
+                                                            second: '2-digit'
+                                                        })}
+                                                    </td>
                                                     <td>{order.status}</td>
-                                                    <td>${order.total}</td>
+                                                    <td>KES {order.quantity * order.price_per_unit}</td>
                                                 </tr>
                                             ))}
                                         </tbody>

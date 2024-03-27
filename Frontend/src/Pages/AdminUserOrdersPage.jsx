@@ -67,7 +67,10 @@ const AdminUserOrdersPage = () => {
                                     <th>Purchased on</th>
                                     <th>Order Status</th>
 
-                                    <th>Manage Order</th>
+                                    {
+                                        userOrders.length &&
+                                        <th>Actions</th>
+                                    }
 
                                 </tr>
                             </thead>
@@ -83,7 +86,7 @@ const AdminUserOrdersPage = () => {
                                         <td>{order.quantity * order.price_per_unit}</td>
                                         <td>{`${new Date(order.order_date).toLocaleDateString().split('/').join('/')}`}</td>
                                         <td>{order.status}</td>
-                                        {order.status === 'Pending' &&
+                                        {order.status === 'pending' &&
                                             <td>
                                                 <div className="button-container">
                                                     <button onClick={() => handleProcessOrder(order.order_id)} className='button'>Process Order</button>
