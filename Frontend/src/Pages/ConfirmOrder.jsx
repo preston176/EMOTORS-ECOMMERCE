@@ -187,7 +187,7 @@ const ConfirmOrder = () => {
                                             <label htmlFor="">Your Email</label>
                                             <input required type="text" placeholder='Email address' value={userDetails.email} onChange={e => setEmail(e.target.value)} />
                                             <label htmlFor="phonenumber">Phone Number</label>
-                                            <input id='phonenumber' required type="text" placeholder='Phone Number' value={userDetails.phone} onChange={e => setPhone(e.target.value)} />
+                                            <input id='phonenumber' required type="text" placeholder='Phone Number' value={`0${userDetails.phone}`} onChange={e => setPhone(e.target.value)} />
                                             <label htmlFor="date">Amount To Pay</label>
                                             <input id='number' type="number" value={selectedBikeAmount} disabled />
                                             <GooglePayButton
@@ -234,7 +234,7 @@ const ConfirmOrder = () => {
 
 
 
-                                            <button type="submit" className='proceed-btn' onClick={handlePayment} disabled>Mobile Payment (Currently unavailable)</button>
+                                            <button type="submit" className='payment-btn' onClick={handlePayment} disabled>Mobile Payment (Currently unavailable)</button>
                                         </form>
                                     </div>
                                 </div>

@@ -28,7 +28,7 @@ tbody tr:hover {
   background-color: #f2f2f2;
 }
 
-.proceed-btn {
+.payment-btn, .proceed-btn {
   background-color: #fa6400;
   color: #fff;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -42,8 +42,13 @@ tbody tr:hover {
   transition: background-color 0.3s, transform 0.3s;
   margin-top: 20px;
 }
+.proceed-btn {
 
-.proceed-btn:hover {
+  cursor: pointer;
+ 
+}
+
+.payment-btn:hover {
   background-color: #595857;
   color: #595857;
 }
