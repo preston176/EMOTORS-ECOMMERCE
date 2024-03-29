@@ -1,3 +1,23 @@
+.admin-status {
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+  align-items: center;
+  font-weight: 700;
+  color: white;
+  width: 60%;
+  background: #008000;
+  height: 15vh;
+  align-items: center;
+}
+.admin-status a {
+  text-decoration: none;
+  color: white;
+}
+.admin-status a:hover {
+  text-decoration: underline;
+}
+
 .card {
   display: flex;
 }
@@ -28,4 +48,36 @@
 .card-text {
   text-align: center;
   padding: 1rem;
+}
+
+.middle {
+  display: flex;
+  flex-direction: row;
+}
+
+.admin-dashboard {
+  justify-content: center;
+  min-height: 50px;
+  /* align-items: center; */
+}
+
+.admin-right-sidebar {
+  background-color: #fff; /* Background color for the sidebar */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow to the sidebar */
+}
+
+.admin-right-sidebar h3 {
+  font-size: 1.5rem; /* Adjust the font size for the heading */
+  margin-bottom: 10px;
+}
+
+.admin-right-sidebar p {
+  font-size: 1rem; /* Adjust the font size for the paragraphs */
+  margin-bottom: 5px; /* Add some spacing between the paragraphs */
+}
+
+.admin-right-sidebar span {
+  font-weight: 550;
 }
