@@ -45,12 +45,12 @@
 
 #### Homepage
 
-![homepage](C:\Users\User\Desktop\projects\UOE\EMOTORS-ECOMMERCE\Screenshots\homepage.png)
+![homepage](./Screenshots/homepage.png)
 
 #### Admin Bike Page
 
-![adminbikespage](C:\Users\User\Desktop\projects\UOE\EMOTORS-ECOMMERCE\Screenshots\adminbikespage.png)
+![adminbikespage](./Screenshots/adminbikespage.png)
 
 #### Product Page
 
-![productpage](C:\Users\User\Desktop\projects\UOE\EMOTORS-ECOMMERCE\Screenshots\productpage.png)
+![productpage](./Screenshots/productpage.png)
