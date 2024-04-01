@@ -105,7 +105,7 @@ const UserProfile = () => {
                     <h2>Manage</h2>
                     <button onClick={() => setActiveButton('orders')}>View Personal Orders</button>
                     <button onClick={() => setActiveButton('change-personal-info')}>Change Personal Info</button>
-                 
+
                     {/* Add any other sidebar content here */}
                 </div>
                 <div className="main-content">
@@ -119,12 +119,21 @@ const UserProfile = () => {
                                         <thead>
                                             <tr>
                                                 <th>Order ID</th>
-                                                <th>Order Date</th>
+                                                <th>Bike Name</th>
                                                 <th>Bikes Ordered</th>
+                                                <th>Bike Photo</th>
                                                 <th>Price per unit</th>
                                                 <th>Date ordered</th>
                                                 <th>Status</th>
                                                 <th>Total</th>
+                                                {
+                                                    userOrders.map((order, index) => {
+                                                        if (order.order_status === 'pending') {
+                                                            return <th key={index}>Track Order</th>;
+                                                        }
+                                                        return null;
+                                                    })
+                                                }
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -133,6 +142,7 @@ const UserProfile = () => {
                                                     <td>{order.order_id}</td>
                                                     <td>{order.name}</td>
                                                     <td>{order.quantity}</td>
+                                                    <td><img className='order-image' src={order.image} alt="" /></td>
                                                     <td>KES {order.price_per_unit}</td>
                                                     <td>
                                                         {new Date(order.order_date).toLocaleString('en-GB', {
@@ -146,6 +156,11 @@ const UserProfile = () => {
                                                     </td>
                                                     <td>{order.status}</td>
                                                     <td>KES {order.quantity * order.price_per_unit}</td>
+                                                    {
+                                                        order.order_status === 'pending' && (<td><button className='btn' onClick={() => {
+
+                                                        }}>Track Order</button></td>)
+                                                    }
                                                 </tr>
                                             ))}
                                         </tbody>

@@ -3,6 +3,25 @@
   margin-top: 20px;
 }
 
+.btn {
+  background-color: #fa6400;
+  color: #fff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.order-image {
+  width: 100%;
+  object-fit: cover;
+}
+
 .main-content {
   flex: 1;
   padding: 2rem;
