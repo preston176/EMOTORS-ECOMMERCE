@@ -32,7 +32,7 @@ const Popular = () => {
 
     return (
         <div className='popular' id='popular'>
-            <h1>POPULAR</h1>
+            <h1>EXPLORE</h1>
             <hr />
             <div className="popular-item">
                 {bikes.map((item) => (
