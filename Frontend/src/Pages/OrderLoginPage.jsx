@@ -2,11 +2,12 @@ import React, { useContext, useState } from 'react';
 import './Css/LoginSignup.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { UserAuthContext } from '../Context/UserAuthContext';
 
 const OrderLoginPage = () => {
-    const { isAuth, handleUserAuth, setActiveUserId, setUserDetails } = useContext(UserAuthContext);
+    const { isAuth, handleUserAuth, setActiveUserId, setUserDetails, productId } = useContext(UserAuthContext);
+
 
     const [userId, setUserId] = useState('');
     const [email, setEmail] = useState('');
@@ -68,7 +69,7 @@ const OrderLoginPage = () => {
 
                 // Show success message or navigate to the user profile page
                 toast.success('Login successful');
-                navigate(-1);
+                navigate(`/product/${productId}`);
 
                 // Proceed with user authentication
                 handleUserAuth();

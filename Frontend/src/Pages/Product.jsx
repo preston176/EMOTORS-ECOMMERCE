@@ -5,11 +5,13 @@ import BreadCrumb from '../Components/BreadCrumbs/BreadCrumb';
 import ProductDisplay from '../Components/ProductDisplay/ProductDisplay';
 import DescriptionBox from '../Components/DescriptionBox/DescriptionBox';
 import RelatedProducts from '../Components/RelatedProducts/RelatedProducts';
+import { UserAuthContext } from '../Context/UserAuthContext';
 
 const Product = () => {
     // const { all_product } = useContext(ShopContext);
     const { productId } = useParams(); // This is how you get the parameter from the URL
     const [selectedBike, setSelectedBike] = useState([]);
+    const { setProductId } = useContext(UserAuthContext)
 
     useEffect(() => {
         fetch(`http://localhost:3000/products/${productId}`,
@@ -22,7 +24,9 @@ const Product = () => {
             .then(response => response.json())
             .then(data => {
                 setSelectedBike(data);
-                console.log(data)
+                setProductId(data.id)
+                // console.log(data)
+
             })
             .catch(error => {
                 console.error('Error:', error);

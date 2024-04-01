@@ -28,6 +28,7 @@ import AdminAddBike from './Pages/AdminAddBike'
 
 const App = () => {
   const [userId, setUserId] = useState('');
+  const [productId, setProductId] = useState(''); 
 
 
   const [isAuth, setIsAuth] = useState(false);
@@ -45,7 +46,7 @@ const App = () => {
   return (
     <div>
       <BrowserRouter>
-        <UserAuthContext.Provider value={{ isAuth, handleUserAuth, userDetails, setUserDetails, quantity, setQuantity, userId, setUserId }}>
+        <UserAuthContext.Provider value={{ isAuth, handleUserAuth, userDetails, setUserDetails, quantity, setQuantity, userId, setUserId, productId, setProductId }}>
           <Navbar />
           <Routes>
             <Route path="/" element={<Shop />} />
