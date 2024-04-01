@@ -137,3 +137,8 @@
   cursor: not-allowed !important;
   color: black !important;
 }
+
+.btn-link {
+  text-decoration: none;
+  color: white;
+}

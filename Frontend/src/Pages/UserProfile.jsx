@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import './CSS/UserProfile.css';
-import { useParams, Navigate, useNavigate } from 'react-router-dom';
+import { useParams, Navigate, useNavigate, Link } from 'react-router-dom';
 import { UserAuthContext } from '../Context/UserAuthContext';
 import { toast } from 'react-toastify';
 
@@ -157,9 +157,10 @@ const UserProfile = () => {
                                                     <td>{order.status}</td>
                                                     <td>KES {order.quantity * order.price_per_unit}</td>
                                                     {
-                                                        order.order_status === 'pending' && (<td><button className='btn' onClick={() => {
-
-                                                        }}>Track Order</button></td>)
+                                                        order.order_status === 'pending' && (<td>
+                                                            <Link className='btn-link' target='_blank' to="https://maps.app.goo.gl/AQ44zSKZ7vERW8GG8">
+                                                                <button className='btn'>Track Order</button>
+                                                            </Link></td>)
                                                     }
                                                 </tr>
                                             ))}
