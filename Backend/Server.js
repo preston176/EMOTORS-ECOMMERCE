@@ -521,7 +521,7 @@ app.get('/orders/:userId', (req, res) => {
     const userId = req.params.userId;
 
     // Execute SQL query to select orders for the specific user ID
-    connection.query('SELECT orders.id AS order_id, order_items.product_id, order_items.quantity, order_items.price_per_unit, order_items.status, orders.order_date, products.name FROM orders JOIN order_items ON orders.id = order_items.order_id JOIN products ON order_items.product_id = products.id WHERE orders.user_id = ?', userId, (err, results) => {
+    connection.query('SELECT orders.id AS order_id, order_items.product_id, order_items.quantity, order_items.price_per_unit, order_items.status, orders.order_date, products.name, products.image_url FROM orders JOIN order_items ON orders.id = order_items.order_id JOIN products ON order_items.product_id = products.id WHERE orders.user_id = ?', userId, (err, results) => {
         if (err) {
             console.error('Error fetching orders:', err.stack);
             res.status(500).json({ error: 'Internal server error' });
@@ -535,9 +535,18 @@ app.get('/orders/:userId', (req, res) => {
         }
 
         // Orders found, send back the order data
-        res.status(200).json(results);
+        // Assuming image_url contains just the file name, you may need to prepend the path
+        const ordersWithImageURL = results.map(order => {
+            return {
+                ...order,
+                image: `http://localhost:3000/images/${order.image_url}`
+            };
+        });
+
+        res.status(200).json(ordersWithImageURL);
     });
 });
+
 
 app.get('/orders', (req, res) => {
     // Execute SQL query to select all orders along with user details
