@@ -39,3 +39,9 @@
   font-size: 18px;
   font-weight: 800;
 }
+
+
+.sort-select {
+  outline: none;
+  border: none;
+}
