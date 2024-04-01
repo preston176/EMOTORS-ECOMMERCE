@@ -45,7 +45,9 @@ const LoginSignup = () => {
             username: name,
             email: email,
             password: password,
-            phone: phone
+            phone: phone,
+            role: "user",
+            status: "active"
         };
 
         // Make a POST request to your backend API to create a new user

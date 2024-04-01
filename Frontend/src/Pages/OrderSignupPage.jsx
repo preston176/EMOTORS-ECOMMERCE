@@ -8,7 +8,7 @@ import { UserAuthContext } from '../Context/UserAuthContext';
 
 const OrderSignupPage = () => {
 
-    const { isAuth, handleUserAuth, setActiveUserId, setUserDetails } = useContext(UserAuthContext);
+    const { isAuth, handleUserAuth, setActiveUserId, setUserDetails, productId } = useContext(UserAuthContext);
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -70,7 +70,7 @@ const OrderSignupPage = () => {
                     // alert('User created successfully');
                     toast.success('User created successfully');
                     setUserDetails(userData)
-                    navigate(-2);
+                    navigate('/order-login-page')
                 } else {
                     // Error occurred during user creation, handle accordingly
                     // alert('Failed to create user');

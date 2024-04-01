@@ -174,7 +174,8 @@ const AdminReports = () => {
                                                         <td>{user.id}</td>
                                                         <td>{user.username}</td>
                                                         <td>{user.email}</td>
-                                                        <td>{`${new Date(user.registration_date).toLocaleDateString().split('/').join('/')}`}</td>
+                                                        <td>{`${new Date(user.registration_date).toLocaleDateString().split('/')[1]}/${new Date(user.registration_date).toLocaleDateString().split('/')[0]}/${new Date(user.registration_date).toLocaleDateString().split('/')[2]}`}</td>
+
                                                         <td>{user.phone === 0 ? "Not Included" : `0${user.phone}`}</td>
                                                         <td>{user.status}</td>
                                                     </tr>
@@ -210,7 +211,7 @@ const AdminReports = () => {
                                                         <td>{user.id}</td>
                                                         <td>{user.username}</td>
                                                         <td>{user.email}</td>
-                                                        <td>{`${new Date(user.registration_date).toLocaleDateString().split('/').join('/')}`}</td>
+                                                        <td>{`${new Date(user.registration_date).toLocaleDateString().split('/')[1]}/${new Date(user.registration_date).toLocaleDateString().split('/')[0]}/${new Date(user.registration_date).toLocaleDateString().split('/')[2]}`}</td>
 
                                                         <td>{user.phone === 0 ? "Not Included" : `0${user.phone}`}</td>
                                                     </tr>
@@ -261,7 +262,8 @@ const AdminReports = () => {
                                                                 <td>{order.quantity}</td>
                                                                 <td>{order.price_per_unit} KES</td>
                                                                 <td>{order.quantity * order.price_per_unit} KES</td>
-                                                                <td>{`${new Date(order.order_date).toLocaleDateString().split('/').join('/')}`}</td>
+                                                                <td>{`${new Date(order.order_date).toLocaleDateString().split('/')[1]}/${new Date(order.order_date).toLocaleDateString().split('/')[0]}/${new Date(order.order_date).toLocaleDateString().split('/')[2]}`}</td>
+
                                                                 <td>{order.status}</td>
                                                             </tr>
                                                         ))
@@ -324,7 +326,8 @@ const AdminReports = () => {
                                                                     <td>{bike.quantity}</td>
                                                                     <td>{bike.description}</td>
                                                                     <td>{bike.category}</td>
-                                                                    <td>{`${new Date(bike.date_added).toLocaleDateString().split('/').join('/')}`}</td>
+                                                                    <td>{`${new Date(bike.date_added).toLocaleDateString().split('/').reverse().join('/')}`}</td>
+
                                                                 </tr>
                                                             ))}
                                                         </tbody>

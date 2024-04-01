@@ -21,7 +21,7 @@ const Navbar = () => {
   const handleBtnClick = () => {
     if (isAuth || userId) {
       handleUserAuth();
-      setUserId(undefined);
+      setUserId('');
       navigate("/");
     } else {
       setUserDetails(null);

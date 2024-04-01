@@ -59,6 +59,13 @@ tbody tr:hover {
   box-shadow: none;
   width: 100%;
 }
+.gpay-button.black.checkout.en {
+  background-image: url(https://www.gstatic.com/instantbuy/svg/dark/checkout/en.svg);
+
+  width: 100%;
+}
+
+
 .backdrop {
   position: fixed;
   top: 0;

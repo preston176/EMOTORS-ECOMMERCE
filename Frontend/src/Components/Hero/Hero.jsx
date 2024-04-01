@@ -3,6 +3,8 @@ import './Hero.css'
 import hand_icon from '../Assets/hand_icon.png'
 import arrow_icon from '../Assets/arrow.png'
 import hero_image from '/Bikes/giant_hybrid.png'
+import { Link } from 'react-scroll'
+import Typewriter from 'typewriter-effect';
 
 const Hero = () => {
     return (
@@ -12,17 +14,27 @@ const Hero = () => {
                 <div>
                     <div className="hero-hand-icon">
                         <p>Hello</p>
-                        <img src={hand_icon} alt="" />
+                        <img src={hand_icon} alt="hand_icon" />
                     </div>
-                    <p>Pedal Into Adventure: </p>
-                    <p>Find Your Perfect Ride Today!</p>
+                    <p>
+                    <Typewriter
+                        options={{
+                            strings: ['Find Your Perfect Ride Today !', 'Pedal into adventure', 'Explore new horizons with our bikes', 'Get your dream bike today'],
+                            autoStart: true,
+                            loop: true,
+                            deleteSpeed: 50,
+                            delay: 40
+                        }}
+                    /></p>
                 </div>
                 <a href="#popular" className='hero-link'>
                     <div className="hero-latest-btn">
-
-                        <img src={arrow_icon} alt="arrow-icon" />
-                        <div>Buy Now</div>
-
+                        <Link to='popular' smooth={true}
+                            offset={50}
+                            duration={500}
+                            isDynamic={true}>
+                            <div>Buy Now</div>
+                        </Link>
                     </div>
                 </a>
             </div>

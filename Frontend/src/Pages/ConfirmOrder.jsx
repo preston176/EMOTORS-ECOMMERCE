@@ -192,6 +192,7 @@ const ConfirmOrder = () => {
                                             <input id='number' type="number" value={selectedBikeAmount} disabled />
                                             <GooglePayButton
                                                 environment="TEST"
+                                                buttonType="checkout"
                                                 paymentRequest={{
                                                     apiVersion: 2,
                                                     apiVersionMinor: 0,
@@ -229,12 +230,17 @@ const ConfirmOrder = () => {
 
                                                     // function to facilitate the success purchase
                                                 }}
-
+                                                onError={
+                                                    (error) => {
+                                                        toast.error('Payment failed');
+                                                        console.log(error);
+                                                    }
+                                                }
                                             />
 
 
 
-                                            <button type="submit" className='payment-btn' onClick={handlePayment} disabled>Mobile Payment (Currently unavailable)</button>
+                                            {/* <button type="submit" className='payment-btn' onClick={handlePayment} disabled>Mobile Payment (Currently unavailable)</button> */}
                                         </form>
                                     </div>
                                 </div>

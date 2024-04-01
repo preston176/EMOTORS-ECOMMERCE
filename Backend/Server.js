@@ -218,7 +218,7 @@ app.post('/products', upload.single('image'), (req, res) => {
     saveAndRenameImage(imageFile, newProduct.name)
         .then((fileName) => {
             // Set the image URL for the new product
-            newProduct.image_url = fileName ;
+            newProduct.image_url = fileName;
 
             // Execute SQL query to insert the new product data into the database
             connection.query('INSERT INTO products SET ?', newProduct, (err, results) => {
@@ -265,7 +265,7 @@ app.get('/images/:productId', (req, res) => {
 
 // Endpoint for user signup
 app.post('/signup', (req, res) => {
-    const { username, email, password, phone } = req.body;
+    const { username, email, password, phone, role, status } = req.body;
 
     // Check if any field is missing
     if (!username || !email || !password || !phone) {
@@ -273,7 +273,7 @@ app.post('/signup', (req, res) => {
     }
 
     // Insert user into the database
-    connection.query('INSERT INTO Users (username, email, password, role, status, phone) VALUES (?, ?, ?, ?,?, ?)', [username, email, password, role, status, phone], (err, results) => {
+    connection.query('INSERT INTO Users (username, email, password, role, status, phone) VALUES (?, ?, ?, ?, ?, ?)', [username, email, password, role, status, phone], (err, results) => {
         if (err) {
             console.error('Error creating user:', err.stack);
             res.status(500).json({ error: 'Internal server error' });

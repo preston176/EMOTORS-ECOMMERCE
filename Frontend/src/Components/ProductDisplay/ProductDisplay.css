@@ -134,6 +134,6 @@
 
 .btn-disabled {
   background: #fcb4b4 !important;
-  cursor: default !important;
+  cursor: not-allowed !important;
   color: black !important;
 }
