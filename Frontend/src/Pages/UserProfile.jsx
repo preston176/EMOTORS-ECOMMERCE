@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import './CSS/UserProfile.css';
 import { useParams, Navigate, useNavigate, Link } from 'react-router-dom';
 import { UserAuthContext } from '../Context/UserAuthContext';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 
 const UserProfile = () => {
     const { userId } = useParams();
@@ -99,6 +99,7 @@ const UserProfile = () => {
 
     return (
         <>
+            <ToastContainer />
             <div className='profile-container'>
                 <div className="sidebar">
                     {/* sidebar content */}
@@ -126,6 +127,7 @@ const UserProfile = () => {
                                                 <th>Date ordered</th>
                                                 <th>Status</th>
                                                 <th>Total</th>
+
                                                 {
                                                     userOrders.map((order, index) => {
                                                         if (order.order_status === 'pending') {
@@ -156,11 +158,12 @@ const UserProfile = () => {
                                                     </td>
                                                     <td>{order.status}</td>
                                                     <td>KES {order.quantity * order.price_per_unit}</td>
-                                                    {
-                                                        order.order_status === 'pending' && (<td>
+
+                                                    {order.status === 'pending' &&
+                                                        <td>
                                                             <Link className='btn-link' target='_blank' to="https://maps.app.goo.gl/AQ44zSKZ7vERW8GG8">
                                                                 <button className='btn'>Track Order</button>
-                                                            </Link></td>)
+                                                            </Link></td>
                                                     }
                                                 </tr>
                                             ))}

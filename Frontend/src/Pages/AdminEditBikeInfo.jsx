@@ -125,7 +125,10 @@ const AdminEditBikeInfo = () => {
 
                             <label htmlFor="price">
                                 <span>Price:</span>
-                                <input type="number" name="price" value={selectedBike.price} placeholder="Enter the price" />
+                                <input type="number" name="price" value={selectedBike.price} onChange={e => setSelectedBike(prevState => ({
+                                    ...prevState,
+                                    price: e.target.value
+                                }))} placeholder="Enter the price" />
                             </label>
 
                             <label htmlFor="category">

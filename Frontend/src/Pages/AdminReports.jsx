@@ -326,7 +326,7 @@ const AdminReports = () => {
                                                                     <td>{bike.quantity}</td>
                                                                     <td>{bike.description}</td>
                                                                     <td>{bike.category}</td>
-                                                                    <td>{`${new Date(bike.date_added).toLocaleDateString().split('/').reverse().join('/')}`}</td>
+                                                                    <td>{`${new Date(bike.date_added).toLocaleDateString().split('/')[1]}/${new Date(bike.date_added).toLocaleDateString().split('/')[0]}/${new Date(bike.date_added).toLocaleDateString().split('/')[2]}`}</td>
 
                                                                 </tr>
                                                             ))}
