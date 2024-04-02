@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2024 at 08:33 AM
+-- Generation Time: Apr 02, 2024 at 09:17 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -54,7 +54,12 @@ INSERT INTO `orders` (`id`, `user_id`, `order_date`, `total_amount`) VALUES
 (1, 10, '2024-03-11 18:30:05', 100.00),
 (2, 11, '2024-03-14 11:31:45', 100.00),
 (4, 12, '2024-03-14 13:27:55', 100.00),
-(5, 2, '2024-03-22 13:23:18', 100.00);
+(5, 2, '2024-03-22 13:23:18', 100.00),
+(6, 10, '2024-03-27 09:00:50', 100.00),
+(7, 12, '2024-03-29 10:43:48', 700.00),
+(8, 17, '2024-04-01 17:36:13', 700.00),
+(9, 7, '2024-04-01 17:57:47', 100.00),
+(10, 19, '2024-04-02 10:36:45', 8000.00);
 
 -- --------------------------------------------------------
 
@@ -79,7 +84,12 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price_pe
 (1, 1, 2, 1, 100.00, 'completed'),
 (2, 2, 2, 1, 100.00, 'completed'),
 (3, 4, 2, 1, 100.00, 'completed'),
-(4, 5, 2, 1, 100.00, 'completed');
+(4, 5, 2, 1, 100.00, 'completed'),
+(5, 6, 2, 1, 100.00, 'completed'),
+(6, 7, 9, 1, 700.00, 'completed'),
+(7, 8, 9, 1, 700.00, 'pending'),
+(8, 9, 2, 1, 100.00, 'pending'),
+(9, 10, 10, 1, 8000.00, 'completed');
 
 -- --------------------------------------------------------
 
@@ -104,7 +114,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `quantity`, `description`, `price`, `category`, `image_url`, `date_added`, `status`) VALUES
-(2, 'Bike1', 2, 'this is the bike ehe', 100.00, 'Casual', 'Bike1.JPG', '2024-02-16', 'active');
+(2, 'Bike1', 4, 'this is the bike ehe', 100.00, 'casual', 'bike1.jpg', '2024-02-16', 'active'),
+(9, 'bmx', 5, 'this is a sports bike for hills', 700.00, 'sports', 'bmx.jpg', '2024-03-29', 'active'),
+(10, 'Holdsworth Helm SRAM Force 22 Titanium Road Bike', 2, 'Eponymous to the Helm, the foreboding wind that roars down the mountain side of Great Dun Fell, Britains highest paved road. The Holdsworth Helm is a contemporary titanium road bike. Built with Aerospace Grade 9 3AL-2.5V Titanium tubing, with precise handling and clearance for 32mm rubber. Light, strong, responsive, and comfortable. This is the purists road machine.\r\n', 8000.00, 'sports', 'holdsworth-helm-sram-force-22-titanium-road-bike.jpg', '2024-04-02', 'active'),
+(11, 'QITONG Junior Children Kids Bike Bicycle', 3, 'this is a kids bike', 9000.00, 'kids', 'qitong-junior-children-kids-bike-bicycle.jpg', '2024-04-02', 'active');
 
 -- --------------------------------------------------------
 
@@ -141,15 +154,19 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `registration_date`, `phone`, `status`) VALUES
-(1, 'pres', 'zaccox@gmail.com', 'shah7860', 'user', '2024-02-13 08:16:26', 0, 'active'),
-(2, 'collo', 'collo@gmail.com', 'sh', 'user', '2024-02-13 08:22:15', 0, 'active'),
-(6, 'collo1', 'collo1@gmail.com', '1234', 'user', '2024-02-13 08:23:18', 0, 'active'),
+(1, 'pres', 'pres@gmail.com', '1234', 'user', '2024-02-13 08:16:26', 721801491, 'active'),
+(2, 'lewis', 'lewis@gmail.com', '1234', 'user', '2024-02-13 08:22:15', 704333420, 'active'),
+(6, 'vladmir', 'vladmir@gmail.com', '1234', 'user', '2024-02-13 08:23:18', 713047881, 'active'),
 (7, 'adewat', 'adewat@gmail.com', '1234', 'user', '2024-02-16 08:48:38', 799078848, 'active'),
-(8, 'john', 'wakenya@gmail.com', '1234', 'user', '2024-02-19 11:59:31', 733182526, 'deleted'),
+(8, 'john', 'wakenya@gmail.com', '12344', 'user', '2024-02-19 05:59:31', 733182526, 'deleted'),
 (10, 'user1', 'user1@gmail.com', 'admin123', 'user', '2024-03-11 16:53:28', 799078850, 'active'),
 (11, 'kafugi', 'kafugi@gmail.com', '12345678', 'user', '2024-03-14 11:29:50', 711991854, 'active'),
 (12, 'testuser1', 'testuser1@gmail.com', '12345678', 'user', '2024-03-14 13:26:03', 711111111, 'active'),
-(13, 'admin1', 'admin1@gmail.com', '1234', 'admin', '2024-03-22 12:17:50', 711991854, 'active');
+(13, 'admin1', 'admin1@gmail.com', '1234', 'admin', '2024-03-22 12:17:50', 711991854, 'active'),
+(15, 'jmx', 'jmx@gmail.com', '1234', 'user', '2024-04-01 17:07:12', 799088882, 'active'),
+(16, 'james', 'james@gmail.com', '1234', 'user', '2024-04-01 17:09:42', 799999987, 'active'),
+(17, 'jonathan', 'jonathan@gmail.com', '1234', 'user', '2024-04-01 17:35:27', 711998746, 'active'),
+(19, 'peter', 'peter@gmail.com', '1234', 'user', '2024-04-02 04:32:14', 788148814, 'active');
 
 --
 -- Indexes for dumped tables
@@ -211,19 +228,19 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `reports`
@@ -235,7 +252,7 @@ ALTER TABLE `reports`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables
