@@ -1,13 +1,15 @@
 @echo off
 
 rem Navigate to the backend directory
-cd /d C:\Users\User\Desktop\projects\UOE\EMOTORS-ECOMMERCE\backend
+cd backend
 
 rem Run npm start in the backend directory
 start npm start
 
 rem Navigate to the frontend directory
-cd /d C:\Users\User\Desktop\projects\UOE\EMOTORS-ECOMMERCE\frontend
+cd ..
+rem Navigate to the frontend directory
+cd frontend
 
 rem Run npm start in the frontend directory
 start npm start
