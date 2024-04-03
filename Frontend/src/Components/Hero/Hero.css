@@ -10,6 +10,9 @@
     flex-wrap: wrap;
     height: 100vh;
   }
+  .hero-right img {
+    display: none;
+  }
 }
 
 .hero-left {
@@ -80,4 +83,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .hero-right img {
+    display: none;
+  }
+}
+
+@media (max-width: 425px) {
+  .hero-left {
+    padding-left: 20px;
+  }
+  .hero-left p {
+    font-size: 2rem;
+  }
 }

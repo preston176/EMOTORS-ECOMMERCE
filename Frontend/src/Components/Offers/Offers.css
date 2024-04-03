@@ -50,3 +50,14 @@
 .offers-right img {
   border-radius: 1rem;
 }
+
+@media (max-width: 768px) {
+  .offers-right img {
+    display: none;
+  }
+  .offers {
+    flex-direction: column;
+    height: 100vh;
+    padding: 0px;
+  }
+}

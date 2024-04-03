@@ -63,3 +63,32 @@
   border-radius: 10px;
   background: #c7c3c7;
 }
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 0px 20px;
+  }
+
+  .footer-logo p {
+    font-size: 36px;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+  }
+  .footer-links li {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0px;
+  }
+
+  .footer-socials-icon {
+    gap: 5px;
+  }
+
+  .footer-copyright {
+    gap: 20px;
+    font-size: 18px;
+  }
+}
