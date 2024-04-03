@@ -14,7 +14,7 @@ const AdminAddBike = () => {
     const [selectedBike, setSelectedBike] = useState({
         name: '',
         description: '',
-        category: 'Casual',
+        category: 'casual',
         price: '',
         image_url: '',
         quantity: 0
