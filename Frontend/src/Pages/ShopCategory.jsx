@@ -59,15 +59,7 @@ const ShopCategory = (props) => {
         <p>
           <span>Showing {props.category} bikes </span>
         </p>
-        <div className="shopcategory-sort">
-          Sort by
-          <select className='sort-select' onChange={(e) => handleSortBy(e.target.value)}>
-            <option value="name">Name</option>
-            <option value="price">Price</option>
-          
-          </select>
-          {/* <img src={dropdown_icon} alt='' /> */}
-        </div>
+   
       </div>
       <div className="shopcategory-products">
         {bikes
@@ -94,3 +86,15 @@ const ShopCategory = (props) => {
 };
 
 export default ShopCategory;
+
+
+
+// <div className="shopcategory-sort">
+// Sort by
+// <select className='sort-select' onChange={(e) => handleSortBy(e.target.value)}>
+//   <option value="name">Name</option>
+//   <option value="price">Price</option>
+
+// </select>
+// {/* <img src={dropdown_icon} alt='' /> */}
+// </div>
